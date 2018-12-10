@@ -1,0 +1,28 @@
+.Nav{
+
+    position: relative;
+
+    &__logo{
+        width: 9rem;
+        height: 9rem;
+        background: black;
+        position: absolute;
+    }
+
+    &__burger{
+        width: 9rem;
+        height: 9rem;
+        background: black;
+        position: absolute;
+        right: 0;
+    }
+
+    &__links{
+        position: absolute;
+        width: 9rem;
+        height: 9rem;
+        right: 0;
+        padding-right: 9rem;
+        background: blue;
+    }
+}
