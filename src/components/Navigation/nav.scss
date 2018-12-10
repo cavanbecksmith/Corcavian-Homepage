@@ -18,6 +18,9 @@
         background: black;
         position: absolute;
         right: 0;
+        @media (max-width: 700px) {
+            width: 33%;
+        }
     }
 
     &__links{
@@ -28,7 +31,7 @@
         padding-right: 9rem;
         background: blue;
         @media (max-width: 700px) {
-            width: 33%;
+            display: none;
         }
     }
 }
