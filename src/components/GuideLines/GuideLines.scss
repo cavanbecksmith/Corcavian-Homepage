@@ -1,32 +1,59 @@
 .GuideLines{
 
+    $lineSize: 1px;
+    $lineColor: #b6b8b9;
+
     position: absolute;
     width: 100%;
     height: 100%;
 
+
     &__line{
         position: absolute;
         height: 100%;
-        width: 1px;
-        background: #ccc;
+        width: $lineSize;
+        background: $lineColor;
+        &.verticle{
+            width: 100%;
+            height: $lineSize;
+        }
+    }
+
+    &__top{
+        position: absolute;
+        top: 9rem;
+    }
+
+    &__bottom{
+        position: absolute;
+        bottom: 4.5rem; // Half of lines position
     }
 
     &__left{
         position: absolute;
         left: 9rem;
         height: 100%;
+        @media (max-width: 700px) {
+            left: 33%;
+        }
     }
 
     &__center{
         position: absolute;
         left: 50%;
         height: 100%;
+        @media (max-width: 700px) {
+            display: none;
+        }
     }
 
     &__right{
         position: absolute;
         right: 9rem;
         height: 100%;
+        @media (max-width: 700px) {
+            right: 33%;
+        }
     }
 
 }

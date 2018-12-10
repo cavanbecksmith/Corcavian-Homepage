@@ -7,6 +7,9 @@
         height: 9rem;
         background: black;
         position: absolute;
+        @media (max-width: 700px) {
+            width: 33%;
+        }
     }
 
     &__burger{
@@ -24,5 +27,8 @@
         right: 0;
         padding-right: 9rem;
         background: blue;
+        @media (max-width: 700px) {
+            width: 33%;
+        }
     }
 }
