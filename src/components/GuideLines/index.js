@@ -11,6 +11,7 @@ export default class GuideLines extends Component {
                 <div className="GuideLines__center GuideLines__line"></div>
                 <div className="GuideLines__right GuideLines__line"></div>
                 <div className="GuideLines__top GuideLines__line verticle"></div>
+                <div className="GuideLines__bot GuideLines__line verticle"></div>
             </div>
         );
     }

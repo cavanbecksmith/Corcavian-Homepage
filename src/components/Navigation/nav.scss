@@ -1,11 +1,8 @@
 .Nav{
-
     position: relative;
-
     &__logo{
         width: 9rem;
         height: 9rem;
-        background: black;
         position: absolute;
         @media (max-width: 700px) {
             width: 33%;
@@ -15,7 +12,6 @@
     &__burger{
         width: 9rem;
         height: 9rem;
-        background: black;
         position: absolute;
         right: 0;
         @media (max-width: 700px) {
@@ -29,7 +25,20 @@
         height: 9rem;
         right: 0;
         padding-right: 9rem;
-        background: blue;
+        min-width: 50%;
+        text-align: right;
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            li{
+                padding-top: 3.5rem;
+                font-size: 21px;
+                padding-right: 2em;
+            }
+        }
+
         @media (max-width: 700px) {
             display: none;
         }
