@@ -14,7 +14,7 @@
             width: auto;
             height: 80%;
         }
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             width: 33%;
         }
     }
@@ -24,7 +24,7 @@
         height: 9rem;
         position: absolute;
         right: 0;
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             width: 33%;
         }
     }
@@ -52,17 +52,17 @@
                 &:last-child{
                     padding-right: 8px;
                 }
-                @media (max-width: 1100px) {
+                @media (max-width: $xl-width) {
                     font-size: 16px;
                     padding-right: 2rem;
                 }
-                @media (max-width: 900px) {
+                @media (max-width: $lg-width) {
                     display: none;
                 }
             }
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             display: none;
         }
     }

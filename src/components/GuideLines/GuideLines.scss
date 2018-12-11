@@ -33,7 +33,7 @@
         position: absolute;
         left: 9rem;
         height: 100%;
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             left: 33%;
         }
     }
@@ -42,7 +42,7 @@
         position: absolute;
         left: 50%;
         height: 100%;
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             display: none;
         }
     }
@@ -51,7 +51,7 @@
         position: absolute;
         right: 9rem;
         height: 100%;
-        @media (max-width: 700px) {
+        @media (max-width: $md-width) {
             right: 33%;
         }
     }
