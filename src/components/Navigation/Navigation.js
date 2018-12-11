@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './nav.scss';
+let LogoBlack = require('./LogoBlack.png');
 
 export default class Navigation extends Component {
 
     render(){
         return (
             <div className="Nav">
-                <div className="Nav__logo"></div>
+
+                <div className="Nav__logo">
+                    <img src={LogoBlack} />
+                </div>
                 <div className="Nav__links">
                     <ul>
                         <li>Home</li>

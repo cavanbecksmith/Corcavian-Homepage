@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import Navigation from './components/Navigation';
-import GuideLines from './components/GuideLines';
+import Navigation from './components/Navigation/Navigation';
+import GuideLines from './components/GuideLines/GuideLines';
+import SlideShowBanner from './components/SlideshowBanner/SlideShowBanner';
 import './index.scss';
 
 class App extends Component {
@@ -9,6 +10,7 @@ class App extends Component {
     return (
       <div className="PageWrapper">
         <Navigation></Navigation>
+        <SlideShowBanner></SlideShowBanner>
         <GuideLines></GuideLines>
         {/* Banner background */}
       </div>
