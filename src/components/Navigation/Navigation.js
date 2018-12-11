@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './nav.scss';
-let LogoBlack = require('./LogoBlack.png');
+// let LogoBlack = require('./LogoBlack.png');
+let LogoBlack = require('assets/LogoBlack-01.png');
+let logoWhite = require('./LogoWhite.png');
 
 export default class Navigation extends Component {
 
