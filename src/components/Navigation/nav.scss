@@ -7,11 +7,12 @@
         height: 9rem;
         position: absolute;
         text-align: center;
-        display: table-row;
-        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         img{
             width: auto;
-            height: 70%;
+            height: 80%;
         }
         @media (max-width: 700px) {
             width: 33%;

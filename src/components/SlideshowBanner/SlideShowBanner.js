@@ -6,9 +6,7 @@ export default class SlideShowBanner extends Component{
     
     render(){
         return(
-            <div className="SlideShowBanner">
-                sdfsdf
-            </div>
+            <div className="SlideShowBanner"></div>
         )
     }
 
