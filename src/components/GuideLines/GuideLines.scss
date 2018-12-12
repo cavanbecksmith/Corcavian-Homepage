@@ -22,7 +22,7 @@
 
     &__top{
         position: absolute;
-        top: 9rem;
+        top: $sideMargin;
     }
 
     &__bot{
@@ -32,9 +32,9 @@
 
     &__left{
         position: absolute;
-        left: 9rem;
+        left: $sideMargin;
         height: 100%;
-        @media (max-width: $md-width) {
+        @media (max-width: $sm-width) {
             left: 33%;
         }
     }
@@ -50,9 +50,9 @@
 
     &__right{
         position: absolute;
-        right: 9rem;
+        right: $sideMargin;
         height: 100%;
-        @media (max-width: $md-width) {
+        @media (max-width: $sm-width) {
             right: 33%;
         }
     }

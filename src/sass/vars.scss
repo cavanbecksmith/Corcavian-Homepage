@@ -11,3 +11,10 @@ $front: 2;
 $middle: 1;
 $back: 0;
 $very-back: -1;
+
+// --- Margins & padding
+$sideMargin: 9rem;
+
+@media (max-width: $md-width) {
+    $sideMargin: 33%;
+}

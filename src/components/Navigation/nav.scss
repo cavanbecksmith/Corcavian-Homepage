@@ -4,8 +4,8 @@
     position: relative;
     z-index: $front;
     &__logo{
-        width: 9rem;
-        height: 9rem;
+        width: $sideMargin;
+        height: $sideMargin;
         position: fixed;
         text-align: center;
         display: flex;
@@ -15,27 +15,27 @@
             width: auto;
             height: 80%;
         }
-        @media (max-width: $md-width) {
+        @media (max-width: $sm-width) {
             width: 33%;
         }
     }
 
     &__burger{
-        width: 9rem;
-        height: 9rem;
+        width: $sideMargin;
+        height: $sideMargin;
         position: fixed;
         right: 0;
-        @media (max-width: $md-width) {
+        @media (max-width: $sm-width) {
             width: 33%;
         }
     }
 
     &__links{
         position: absolute;
-        width: 9rem;
-        height: 9rem;
+        width: $sideMargin;
+        height: $sideMargin;
         right: 0;
-        padding-right: 9rem;
+        padding-right: $sideMargin;
         min-width: 50%;
         text-align: right;
         ul{
