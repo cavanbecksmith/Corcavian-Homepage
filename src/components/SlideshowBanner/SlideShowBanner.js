@@ -24,14 +24,28 @@ export default class SlideShowBanner extends Component{
 
     render(){
         return(
-            <div 
-            className="SlideShowBanner" 
-            style={{
-                backgroundImage: `url(${this.state.images[0]})`,
-                backgroundSize: 'cover'
-            }}
-            >
-                <div className="SlideShowBanner__container"></div>
+            <div style={{width: '100%', height: '100%'}}>
+
+                {this.state.images.map((v,i)=>{
+
+                    return(
+                        <div
+                            className="SlideShowBanner"
+                            style={{
+                                backgroundImage: `url(${this.state.images[i]})`,
+                                backgroundSize: 'cover'
+                            }}
+                            key={i}
+                        >
+                            <div className="SlideShowBanner__container">
+                                <div
+                                    className="SlideShowBanner__container__innerIMG"
+                                    style={{ backgroundImage: `url(${this.state.images[i]})` }}></div>
+                            </div>
+                        </div>
+                    );
+
+                })}
             </div>
         )
     }
