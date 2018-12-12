@@ -2,10 +2,11 @@
 
 .Nav{
     position: relative;
+    z-index: $front;
     &__logo{
         width: 9rem;
         height: 9rem;
-        position: absolute;
+        position: fixed;
         text-align: center;
         display: flex;
         align-items: center;
@@ -22,7 +23,7 @@
     &__burger{
         width: 9rem;
         height: 9rem;
-        position: absolute;
+        position: fixed;
         right: 0;
         @media (max-width: $md-width) {
             width: 33%;

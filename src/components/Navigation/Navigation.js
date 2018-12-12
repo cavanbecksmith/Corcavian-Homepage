@@ -12,7 +12,7 @@ export default class Navigation extends Component {
             <div className="Nav">
 
                 <div className="Nav__logo">
-                    <img src={LogoBlack} />
+                    <img src={LogoWhite} />
                 </div>
                 <div className="Nav__links">
                     <ul>
