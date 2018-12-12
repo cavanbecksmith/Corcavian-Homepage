@@ -3,4 +3,9 @@
     height: 100%;
     position: absolute;
     background-size: contain;
+    &__container{
+        padding-top: $sideMargin;
+        margin: 0 $sideMargin;
+        height: calc(100% - 4.5rem);
+    }
 }

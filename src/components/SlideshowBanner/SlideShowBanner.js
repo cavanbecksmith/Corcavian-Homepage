@@ -30,7 +30,9 @@ export default class SlideShowBanner extends Component{
                 backgroundImage: `url(${this.state.images[0]})`,
                 backgroundSize: 'cover'
             }}
-            ></div>
+            >
+                <div className="SlideShowBanner__container"></div>
+            </div>
         )
     }
 
