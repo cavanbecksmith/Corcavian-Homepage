@@ -6,8 +6,8 @@ export default class SlideShowBanner extends Component{
     
     constructor(props){
         super(props);
-        this.state = { 
-            slideIndex: 0, 
+        this.state = {
+            slideIndex: 0,
             images: [
                 require('assets/slideshow/img_01.jpg'),
                 require('assets/slideshow/img_02.jpg'),
@@ -38,28 +38,34 @@ export default class SlideShowBanner extends Component{
         return(
             <div style={{width: '100%', height: '100%'}}>
 
-                <button style={{zIndex: 1000, position: "absolute",}} onClick={this.nextSlide}>sdfsdf</button>
+                <button style={{zIndex: 1000, position: "absolute"}} onClick={this.nextSlide}>sdfsdf</button>
 
                 {this.state.images.map((v,i)=>{
 
-                    let opacity;
+                    let opacity = 1;
+                    let wrapperClass = "SlideShowBanner";
                     let containerClasses = "SlideShowBanner__container";
                     let backgroundClasses = "SlideShowBanner__backgroundIMG";
+                    let zIndex;
+
 
                     if(i !== this.state.slideIndex){
-                        opacity = 0;
+                        zIndex = 1;
+                        containerClasses += " outAnim";
+                        backgroundClasses += " outAnim"
+                        wrapperClass += " hide";
                     }
                     else{
-                        opacity = 1;
+                        zIndex = 0;
                         containerClasses += " inAnim";
                         backgroundClasses += " inAnim";
                     }
 
                     return(
                         <div
-                            className="SlideShowBanner"
+                            className={wrapperClass}
                             style={{
-                                opacity: opacity
+                                zIndex
                             }}
                             key={i}
                         >

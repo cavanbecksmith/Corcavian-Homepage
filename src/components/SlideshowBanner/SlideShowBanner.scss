@@ -3,6 +3,13 @@
     height: 100%;
     position: absolute;
     background-size: contain;
+    &.hide{
+        opacity: 0;
+        animation:frame_hide 1s 1;
+        -moz-animation:frame_hide 1s 1;
+        -webkit-animation:frame_hide 1s 1;
+        -o-animation:frame_hide 1s 1;
+    }
     &__backgroundIMG{
         position: absolute;
         top: 0;
@@ -11,10 +18,18 @@
         height: 100%;
         &.inAnim{
             opacity: 1;
-            animation:background_anim 1s 1;
-            -moz-animation:background_anim 1s 1;
-            -webkit-animation:background_anim 1s 1;
-            -o-animation:background_anim 1s 1;
+            animation:background_anim_in 1s 1;
+            -moz-animation:background_anim_in 1s 1;
+            -webkit-animation:background_anim_in 1s 1;
+            -o-animation:background_anim_in 1s 1;
+            animation-delay: 0.75s;
+        }
+        &.outAnim{
+            opacity: 0;
+            animation:background_anim_out 1s 1;
+            -moz-animation:background_anim_out 1s 1;
+            -webkit-animation:background_anim_out 1s 1;
+            -o-animation:background_anim_out 1s 1;
         }
     }
     &__container{
@@ -23,16 +38,21 @@
         height: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
         position: relative;
         overflow: hidden;
-        .outAnim{
+        &.outAnim{
             opacity: 0;
+            animation:container_anim_out 1s 1;
+            -moz-animation:container_anim_out 1s 1;
+            -webkit-animation:container_anim_out 1s 1;
+            -o-animation:container_anim_out 1s 1;
         }
         &.inAnim{
             transform: rotate(0);
             opacity: 1;
-            animation:container_anim 1s 1;
-            -moz-animation:container_anim 1s 1;
-            -webkit-animation:container_anim 1s 1;
-            -o-animation:container_anim 1s 1;
+            animation:container_anim_in 1s 1;
+            -moz-animation:container_anim_in 1s 1;
+            -webkit-animation:container_anim_in 1s 1;
+            -o-animation:container_anim_in 1s 1;
+            animation-delay: 0.75s;
         }
         &__innerIMG{
             background-size: cover;
@@ -46,11 +66,12 @@
     }
 }
 
-@keyframes container_anim
+// IN
+@keyframes container_anim_in
 {
 0% {
     opacity: 0;
-    transform: rotate(15deg);
+    transform: rotate(15deg) scale(0.9);
 }
 20%{
     opacity: 1;
@@ -60,16 +81,59 @@
 }
 }
 
-@keyframes background_anim
+// OUT
+@keyframes container_anim_out
+{
+0% {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+80%{
+    opacity: 1;
+    transform: rotate(-15deg) scale(0.75);
+}
+100% {
+    opacity: 0;
+}
+}
+
+// IN
+@keyframes background_anim_in
 {
 0% {
     opacity: 0;
-    transform: rotate(15deg) scale(1.4);
+    transform: rotate(15deg) scale(1.6);
 }
 20%{
     opacity: 1;
 }
 100% {
     transform: rotate(0deg);
+}
+}
+
+// OUT
+@keyframes background_anim_out
+{
+0% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+80%{
+    opacity: 1;
+    transform: rotate(-15deg) scale(1.6);
+}
+100% {
+    opacity: 0;
+}
+}
+
+@keyframes frame_hide
+{
+0% {
+    opacity: 1;
+}
+100% {
+    opacity: 1;
 }
 }
