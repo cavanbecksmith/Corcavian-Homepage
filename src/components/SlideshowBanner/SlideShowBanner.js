@@ -14,22 +14,25 @@ export default class SlideShowBanner extends Component{
                 require('assets/slideshow/img_03.jpg'),
             ]
         };
+        this.nextSlide = this.nextSlide.bind(this);
     }
 
     componentDidMount() {}
 
     nextSlide(){
-        console.log(this.state);
-        // this.setState((state, props) => {
-        //     return { slideIndex: slideIndex++ };
-        // });
-        this.setState({
-            slideIndex: this.state.slideIndex + 1
-        });
 
+        if(this.state.slideIndex === this.state.images.length - 1){
+            this.setState({
+                slideIndex: 0
+            });
+        }
+        else{
+            this.setState({
+                slideIndex: this.state.slideIndex + 1
+            });
+        }
     }
 
-    // previousSlide() {}
 
     render(){
         return(
@@ -40,25 +43,36 @@ export default class SlideShowBanner extends Component{
                 {this.state.images.map((v,i)=>{
 
                     let opacity;
+                    let containerClasses = "SlideShowBanner__container";
+                    let backgroundClasses = "SlideShowBanner__backgroundIMG";
 
                     if(i !== this.state.slideIndex){
                         opacity = 0;
                     }
                     else{
                         opacity = 1;
+                        containerClasses += " inAnim";
+                        backgroundClasses += " inAnim";
                     }
 
                     return(
                         <div
                             className="SlideShowBanner"
                             style={{
-                                backgroundImage: `url(${this.state.images[i]})`,
-                                backgroundSize: 'cover',
                                 opacity: opacity
                             }}
                             key={i}
                         >
-                            <div className="SlideShowBanner__container">
+
+                            <div 
+                                className={backgroundClasses}
+                                style={{
+                                    backgroundImage: `url(${this.state.images[i]})`,
+                                    backgroundSize: 'cover'
+                                }}
+                            ></div>
+
+                            <div className={containerClasses}>
                                 <div
                                     className="SlideShowBanner__container__innerIMG"
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>

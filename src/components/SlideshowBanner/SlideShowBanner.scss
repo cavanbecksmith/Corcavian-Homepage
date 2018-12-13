@@ -3,12 +3,37 @@
     height: 100%;
     position: absolute;
     background-size: contain;
+    &__backgroundIMG{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        &.inAnim{
+            opacity: 1;
+            animation:background_anim 1s 1;
+            -moz-animation:background_anim 1s 1;
+            -webkit-animation:background_anim 1s 1;
+            -o-animation:background_anim 1s 1;
+        }
+    }
     &__container{
         margin: 0 $sideMargin;
         margin-top: $sideMargin;
         height: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
         position: relative;
         overflow: hidden;
+        .outAnim{
+            opacity: 0;
+        }
+        &.inAnim{
+            transform: rotate(0);
+            opacity: 1;
+            animation:container_anim 1s 1;
+            -moz-animation:container_anim 1s 1;
+            -webkit-animation:container_anim 1s 1;
+            -o-animation:container_anim 1s 1;
+        }
         &__innerIMG{
             background-size: cover;
             position: absolute;
@@ -19,4 +44,32 @@
             height: calc(100% + #{$sideMargin} + (#{$sideMargin} / 2));
         }
     }
+}
+
+@keyframes container_anim
+{
+0% {
+    opacity: 0;
+    transform: rotate(15deg);
+}
+20%{
+    opacity: 1;
+}
+100% {
+    transform: rotate(0deg);
+}
+}
+
+@keyframes background_anim
+{
+0% {
+    opacity: 0;
+    transform: rotate(15deg) scale(1.4);
+}
+20%{
+    opacity: 1;
+}
+100% {
+    transform: rotate(0deg);
+}
 }
