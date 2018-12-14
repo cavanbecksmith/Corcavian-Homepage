@@ -10,8 +10,6 @@ export const FullScreenPanel = (props)=> {
         backgroundColor: props.bk
     }
 
-    console.log(props);
-
     return (
         <div className="FullScreenPanel" style={styles}>
             {props.children}

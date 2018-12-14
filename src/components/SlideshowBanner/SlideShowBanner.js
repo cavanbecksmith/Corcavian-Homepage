@@ -6,6 +6,7 @@ export default class SlideShowBanner extends Component{
     
     constructor(props){
         super(props);
+        this.loaded = false;
         this.state = {
             slideIndex: 0,
             images: [
@@ -17,7 +18,10 @@ export default class SlideShowBanner extends Component{
         this.nextSlide = this.nextSlide.bind(this);
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        // --- Prevents the animation from running before the component has mounted
+        this.loaded = true;
+    }
 
     nextSlide(){
 
@@ -33,7 +37,6 @@ export default class SlideShowBanner extends Component{
         }
     }
 
-
     render(){
         return(
             <div style={{width: '100%', height: '100%'}}>
@@ -44,21 +47,23 @@ export default class SlideShowBanner extends Component{
 
                     let opacity = 1;
                     let wrapperClass = "SlideShowBanner";
-                    let containerClasses = "SlideShowBanner__container";
+                    let containerClasses = "";
                     let backgroundClasses = "SlideShowBanner__backgroundIMG";
+                    let innerIMGClass = "SlideShowBanner__container__innerIMG"
                     let zIndex;
 
-
-                    if(i !== this.state.slideIndex){
-                        zIndex = 1;
-                        containerClasses += " outAnim";
-                        backgroundClasses += " outAnim"
-                        wrapperClass += " hide";
-                    }
-                    else{
-                        zIndex = 0;
-                        containerClasses += " inAnim";
-                        backgroundClasses += " inAnim";
+                    if(this.loaded){
+                        if (i !== this.state.slideIndex) {
+                            zIndex = 1;
+                            innerIMGClass += " outAnim";
+                            backgroundClasses += " outAnim"
+                            wrapperClass += " hide";
+                        }
+                        else {
+                            zIndex = 0;
+                            innerIMGClass += " inAnim";
+                            backgroundClasses += " inAnim";
+                        }
                     }
 
                     return(
@@ -78,13 +83,15 @@ export default class SlideShowBanner extends Component{
                                 }}
                             ></div>
 
-                            <div className={containerClasses}>
+                            <div className="SlideShowBanner__container">
                                 <div
-                                    className="SlideShowBanner__container__innerIMG"
+                                    className={innerIMGClass}
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>
                             </div>
                         </div>
                     );
+
+
 
                 })}
             </div>

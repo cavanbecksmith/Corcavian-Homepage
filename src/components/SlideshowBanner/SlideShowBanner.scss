@@ -22,7 +22,7 @@
             -moz-animation:background_anim_in 1s 1;
             -webkit-animation:background_anim_in 1s 1;
             -o-animation:background_anim_in 1s 1;
-            // animation-delay: 0.3s;
+            animation-delay: 0.3s;
         }
         &.outAnim{
             opacity: 0;
@@ -38,22 +38,6 @@
         height: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
         position: relative;
         overflow: hidden;
-        &.outAnim{
-            opacity: 0;
-            animation:container_anim_out 0.5s 1;
-            -moz-animation:container_anim_out 0.5s 1;
-            -webkit-animation:container_anim_out 0.5s 1;
-            -o-animation:container_anim_out 0.5s 1;
-        }
-        &.inAnim{
-            transform: rotate(0);
-            opacity: 1;
-            animation:container_anim_in 1s 1;
-            -moz-animation:container_anim_in 1s 1;
-            -webkit-animation:container_anim_in 1s 1;
-            -o-animation:container_anim_in 1s 1;
-            // animation-delay: 0.3s;
-        }
         &__innerIMG{
             background-size: cover;
             position: absolute;
@@ -62,8 +46,28 @@
             left: -#{$sideMargin};
             width: calc(100% + (#{$sideMargin} * 2));
             height: calc(100% + #{$sideMargin} + (#{$sideMargin} / 2));
+            &.outAnim{
+                opacity: 0;
+                animation:container_anim_out 0.5s 1;
+                -moz-animation:container_anim_out 0.5s 1;
+                -webkit-animation:container_anim_out 0.5s 1;
+                -o-animation:container_anim_out 0.5s 1;
+            }
+            &.inAnim{
+                transform: rotate(0);
+                opacity: 1;
+                animation:container_anim_in 1s 1;
+                -moz-animation:container_anim_in 1s 1;
+                -webkit-animation:container_anim_in 1s 1;
+                -o-animation:container_anim_in 1s 1;
+                animation-delay: 0.3s;
+            }
         }
     }
+}
+
+.hidden{
+    opacity: 0;
 }
 
 // IN
@@ -71,7 +75,7 @@
 {
     0% {
         opacity: 0;
-        transform: rotate(15deg) scale(0.9);
+        transform: rotate(15deg) scale(1.2);
     }
     20%{
         opacity: 1;
@@ -90,7 +94,7 @@
     }
     100%{
         opacity: 0;
-        transform: rotate(0deg) scale(1.2);
+        transform: rotate(-5deg) scale(1.2);
     }
 }
 
@@ -99,7 +103,7 @@
 {
     0% {
         opacity: 0;
-        transform: rotate(15deg) scale(1.6);
+        transform: rotate(5deg) scale(1.2);
     }
     // 20%{
     // }
