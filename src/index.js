@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <GuideLines></GuideLines>
-        <FullScreenPanel>
+        <FullScreenPanel bk="#000">
           <Navigation></Navigation>
           <SlideShowBanner></SlideShowBanner>
         </FullScreenPanel>
