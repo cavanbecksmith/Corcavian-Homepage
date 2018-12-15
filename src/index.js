@@ -15,7 +15,6 @@ class App extends Component {
           <Navigation></Navigation>
           <SlideShowBanner></SlideShowBanner>
         </FullScreenPanel>
-        {/* Banner background */}
       </div>
     );
   }

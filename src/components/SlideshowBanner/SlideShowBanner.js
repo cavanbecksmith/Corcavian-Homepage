@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
+import { relative } from "path";
 
 export default class SlideShowBanner extends Component{
     
@@ -13,6 +14,17 @@ export default class SlideShowBanner extends Component{
                 require('assets/slideshow/img_01.jpg'),
                 require('assets/slideshow/img_02.jpg'),
                 require('assets/slideshow/img_03.jpg'),
+            ],
+            text: [
+                {
+                    header: 'Hello', para: 'world'
+                },
+                {
+                    header: 'Goodbye', para: 'cruel world'
+                },
+                {
+                    header: 'Suck', para: 'my balls'
+                }
             ]
         };
         this.nextSlide = this.nextSlide.bind(this);
@@ -87,6 +99,9 @@ export default class SlideShowBanner extends Component{
                                 <div
                                     className={innerIMGClass}
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>
+                                <div className="SlideShowBanner__container__content">
+                                    {`#${this.state.text[i].header} ${this.state.text[i].para}`}
+                                </div>
                             </div>
                         </div>
                     );
