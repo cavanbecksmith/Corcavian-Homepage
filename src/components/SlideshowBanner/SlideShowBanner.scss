@@ -22,7 +22,7 @@
             -moz-animation:background_anim_in 1s 1;
             -webkit-animation:background_anim_in 1s 1;
             -o-animation:background_anim_in 1s 1;
-            animation-delay: 0.3s;
+            // animation-delay: 1s;
         }
         &.outAnim{
             opacity: 0;
@@ -60,7 +60,7 @@
                 -moz-animation:container_anim_in 1s 1;
                 -webkit-animation:container_anim_in 1s 1;
                 -o-animation:container_anim_in 1s 1;
-                animation-delay: 0.3s;
+                // animation-delay: 1s;
             }
         }
     }
