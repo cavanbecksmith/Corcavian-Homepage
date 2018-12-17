@@ -1,9 +1,21 @@
+.SlideShowWrapper{
+    background: black;
+    overflow: hidden;
+    position: relative;
+    @include Fullsize;
+    @media (max-width: $md-width) { /* 700px */
+        height: 50%;
+    }
+}
+
 .SlideShowBanner{
     $overlayOpacity: 0.45;
-    width: 100%;
-    height: 100%;
+    @include Fullsize;
     position: absolute;
     background-size: contain;
+    @media (max-width: $md-width) { /* 700px */
+        left: 0;
+    }
     &.hide{
         opacity: 0;
         z-index: -1;
@@ -17,8 +29,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        @include Fullsize;
         @include overlay($overlayOpacity);
         &.inAnim{
             opacity: 1;
@@ -42,6 +53,10 @@
         height: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
         position: relative;
         overflow: hidden;
+        @media (max-width: $md-width) { /* 700px */
+            height: calc(100% - #{$sideMargin});
+            left: 0;
+        }
         &__innerIMG{
             @include overlay($overlayOpacity);
             background-size: cover;
@@ -51,6 +66,9 @@
             left: -#{$sideMargin};
             width: calc(100% + (#{$sideMargin} * 2));
             height: calc(100% + #{$sideMargin} + (#{$sideMargin} / 2));
+            @media (max-width: $md-width) { /* 700px */
+                height: calc(100% + #{$sideMargin});
+            }
             &.outAnim{
                 opacity: 0;
                 animation:container_anim_out 0.5s 1;
@@ -75,13 +93,10 @@
             left: 50%;
             height: 100%;
             overflow: hidden;
-            // &:before{
-            //     // Hack for verticle align content
-            //     display: inline-block;
-            //     height: 100%;
-            //     content: "";
-            //     vertical-align: middle;
-            // }
+            @media (max-width: $md-width) { /* 700px */
+                width: 100% !important;
+                left: 0;
+            }
             &__text{
                 $y: -50%;
                 height: auto;

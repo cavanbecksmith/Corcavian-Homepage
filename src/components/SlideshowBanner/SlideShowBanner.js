@@ -24,7 +24,7 @@ export default class SlideShowBanner extends Component{
                     header: `2 + 2 is 4 - 1 that's 3 Quick Mafs!`, para: `- Big Shaq`
                 },
                 {
-                    header: `Fuck everybody but me!`, para: '- Me'
+                    header: `Hello world something goes here!`, para: '- Me'
                 }
             ]
         };
@@ -61,7 +61,7 @@ export default class SlideShowBanner extends Component{
 
     render(){
         return(
-            <div style={{width: '100%', height: '100%'}}>
+            <div className="SlideShowWrapper">
 
                 <button style={{zIndex: 1000, position: "absolute"}} onClick={this.nextSlide}>sdfsdf</button>
 
