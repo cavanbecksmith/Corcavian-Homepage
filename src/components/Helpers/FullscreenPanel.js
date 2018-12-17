@@ -1,19 +1,20 @@
 import React from 'react';
+import "./FullScreenPanel.scss";
 
 export const FullScreenPanel = (props)=> {
 
     const styles = {
         display: 'block',
-        width: '100%',
-        height: '100%',
         position: 'relative',
         backgroundColor: props.bk,
         fontSize: props.fontSize,
         lineHeight: props.lineHeight
     }
 
+    let classN = "FullScreenPanel" + (props.halfH ? " halfH" : "");
+
     return (
-        <div className="FullScreenPanel" style={styles}>
+        <div className={classN} style={styles}>
             {props.children}
         </div>
     );

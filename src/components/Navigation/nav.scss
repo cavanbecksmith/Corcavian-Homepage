@@ -15,9 +15,9 @@
             width: auto;
             height: 80%;
         }
-        @media (max-width: $sm-width) {
-            width: 33%;
-        }
+        // @media (max-width: $sm-width) {
+        //     width: 33%;
+        // }
     }
 
     &__burger{
@@ -25,9 +25,9 @@
         height: $sideMargin;
         position: fixed;
         right: 0;
-        @media (max-width: $sm-width) {
-            width: 33%;
-        }
+        // @media (max-width: $sm-width) {
+        //     width: 33%;
+        // }
     }
 
     &__links{

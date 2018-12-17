@@ -9,6 +9,9 @@ body, html{
 	@media (max-width: $lg-width) { /* 900px */
 		font-size: 14px;
 	}
+	@media (max-width: $sm-width){ /* 500px */
+		font-size: 7px;
+	}
 	#root{
 		@include Fullsize;
 		.wrapper{

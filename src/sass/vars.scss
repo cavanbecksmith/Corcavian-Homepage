@@ -2,7 +2,7 @@
 $xxl-width: 1600px;
 $xl-width: 1100px;
 $lg-width: 900px;
-$md-width: 700px;
+$md-width: 800px;
 $sm-width: 500px;
 
 // --- Background z-index
@@ -14,7 +14,3 @@ $very-back: -1;
 
 // --- Margins & padding
 $sideMargin: 9rem;
-
-@media (max-width: $md-width) {
-    $sideMargin: 33%;
-}

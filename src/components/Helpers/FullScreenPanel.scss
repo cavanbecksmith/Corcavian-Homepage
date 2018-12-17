@@ -1,0 +1,9 @@
+.FullScreenPanel{
+    height: 100%;
+    width: 100%;
+    &.halfH{
+        @media (max-width: $md-width) {
+            height: 600px;
+        }
+    }
+}

@@ -3,9 +3,9 @@
     overflow: hidden;
     position: relative;
     @include Fullsize;
-    @media (max-width: $md-width) { /* 700px */
-        height: 50%;
-    }
+    // @media (max-width: $md-width) { /* 700px */
+    //     height: 50%;
+    // }
 }
 
 .SlideShowBanner{
@@ -69,6 +69,9 @@
             @media (max-width: $md-width) { /* 700px */
                 height: calc(100% + #{$sideMargin});
             }
+            @media (max-width: $sm-width) { /* 700px */
+                display: none !important;
+            }
             &.outAnim{
                 opacity: 0;
                 animation:container_anim_out 0.5s 1;
@@ -93,9 +96,12 @@
             left: 50%;
             height: 100%;
             overflow: hidden;
-            @media (max-width: $md-width) { /* 700px */
-                width: 100% !important;
+            @media (max-width: $lg-width) { /* 700px */
+                width: calc(100% - #{$sideMargin}) !important;
                 left: 0;
+            }
+            @media (max-width: $md-width) { /* 500px */
+                padding: 0 30px;
             }
             &__text{
                 $y: -50%;
@@ -109,6 +115,7 @@
                 padding-left: 0.5em;
                 transform: translate3d(0, $y, 0);
                 z-index: 10000;
+
                 &.inAnim{
                     $x: 0;
                     transform: translate3d($x, $y, 0);
@@ -119,7 +126,7 @@
                     @keyframes inAnim {
                         from{
                             opacity: 0;
-                            transform: translate3d(200%, $y, 0);
+                            transform: translate3d(200%, $y, 0); 
                         }
                         to{
                             opacity: 1;
@@ -149,6 +156,12 @@
                 }
                 .header{
                     font-size: 4em;
+                    @media (max-width: $md-width) { /* 800px */
+                        font-size: 3em;
+                    }
+                    @media (max-width: $sm-width) { /* 500px */
+                        font-size: 5em;
+                    }
                 }
                 .footnote{
                     font-size:1.25em;

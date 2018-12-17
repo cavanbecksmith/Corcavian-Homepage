@@ -34,16 +34,16 @@
         position: absolute;
         left: $sideMargin;
         height: 100%;
-        @media (max-width: $sm-width) {
-            left: 33%;
-        }
+        // @media (max-width: $sm-width) {
+        //     left: 33%;
+        // }
     }
 
     &__center{
         position: absolute;
         left: 50%;
         height: 100%;
-        @media (max-width: $md-width) {
+        @media (max-width: $lg-width) {
             display: none;
         }
     }
@@ -52,9 +52,9 @@
         position: absolute;
         right: $sideMargin;
         height: 100%;
-        @media (max-width: $sm-width) {
-            right: 33%;
-        }
+        // @media (max-width: $sm-width) {
+        //     right: 33%;
+        // }
     }
 
 }
