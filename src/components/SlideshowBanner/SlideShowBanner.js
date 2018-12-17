@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
 import { relative } from "path";
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
+// import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 export default class SlideShowBanner extends Component{
     
@@ -34,8 +34,7 @@ export default class SlideShowBanner extends Component{
     componentDidMount() {
         // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
-        var $t = this; 
-        this.timeOut();
+        // this.timeOut();
     }
 
     timeOut(){
@@ -62,6 +61,8 @@ export default class SlideShowBanner extends Component{
     render(){
         return(
             <div className="SlideShowWrapper">
+
+                {this.props.children}
 
                 <button style={{zIndex: 1000, position: "absolute"}} onClick={this.nextSlide}>sdfsdf</button>
 

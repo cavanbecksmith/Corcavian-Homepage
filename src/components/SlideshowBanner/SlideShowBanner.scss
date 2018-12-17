@@ -3,9 +3,6 @@
     overflow: hidden;
     position: relative;
     @include Fullsize;
-    // @media (max-width: $md-width) { /* 700px */
-    //     height: 50%;
-    // }
 }
 
 .SlideShowBanner{
@@ -19,7 +16,6 @@
     &.hide{
         opacity: 0;
         z-index: -1;
-        // display: none;
         animation:frame_hide 1s 1;
         -moz-animation:frame_hide 1s 1;
         -webkit-animation:frame_hide 1s 1;
@@ -96,12 +92,18 @@
             left: 50%;
             height: 100%;
             overflow: hidden;
-            @media (max-width: $lg-width) { /* 700px */
-                width: calc(100% - #{$sideMargin}) !important;
+            box-sizing: border-box;
+            padding-left: 10px;
+            padding-right: 40px;
+            @media (max-width: $lg-width) { /* 900px */
+                width: 100% !important;
                 left: 0;
+                padding: 0 10px;
+                text-align: center;
             }
             @media (max-width: $md-width) { /* 500px */
                 padding: 0 30px;
+                text-align: center !important;
             }
             &__text{
                 $y: -50%;
@@ -112,10 +114,13 @@
                 vertical-align: middle;
                 top: 50%;
                 overflow: hidden;
-                padding-left: 0.5em;
+                // padding-left: 0.5em;
                 transform: translate3d(0, $y, 0);
                 z-index: 10000;
-
+                @media (max-width: $lg-width) { /* 700px */
+                    position: relative;
+                    width: 100%;
+                }
                 &.inAnim{
                     $x: 0;
                     transform: translate3d($x, $y, 0);
