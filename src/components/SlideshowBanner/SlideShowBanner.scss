@@ -1,10 +1,13 @@
 .SlideShowBanner{
+    $overlayOpacity: 0.45;
     width: 100%;
     height: 100%;
     position: absolute;
     background-size: contain;
     &.hide{
         opacity: 0;
+        z-index: -1;
+        // display: none;
         animation:frame_hide 1s 1;
         -moz-animation:frame_hide 1s 1;
         -webkit-animation:frame_hide 1s 1;
@@ -16,6 +19,7 @@
         left: 0;
         width: 100%;
         height: 100%;
+        @include overlay($overlayOpacity);
         &.inAnim{
             opacity: 1;
             animation:background_anim_in 1s 1;
@@ -39,6 +43,7 @@
         position: relative;
         overflow: hidden;
         &__innerIMG{
+            @include overlay($overlayOpacity);
             background-size: cover;
             position: absolute;
             left: 0;
@@ -64,10 +69,76 @@
             }
         }
         &__content{
+            $y: -50%;
             position: relative;
             width: 50%;
             left: 50%;
             height: 100%;
+            overflow: hidden;
+            // &:before{
+            //     // Hack for verticle align content
+            //     display: inline-block;
+            //     height: 100%;
+            //     content: "";
+            //     vertical-align: middle;
+            // }
+            &__text{
+                $y: -50%;
+                height: auto;
+                display: inline-block;
+                position: absolute;
+                color: white;
+                vertical-align: middle;
+                top: 50%;
+                overflow: hidden;
+                padding-left: 0.5em;
+                transform: translate3d(0, $y, 0);
+                z-index: 10000;
+                &.inAnim{
+                    $x: 0;
+                    transform: translate3d($x, $y, 0);
+                    animation: inAnim 1s 1;
+                    -moz-animation: inAnim 1s 1;
+                    -webkit-animation: inAnim 1s 1;
+                    -o-animation: inAnim 1s 1;
+                    @keyframes inAnim {
+                        from{
+                            opacity: 0;
+                            transform: translate3d(200%, $y, 0);
+                        }
+                        to{
+                            opacity: 1;
+                            transform: translate3d($x, $y, 0);
+                        }
+                    }
+                }
+                &.outAnim{
+                    $x: -100%;
+                    transition: all 1s;
+                    transform: translate3d($x, $y, 0);
+                    animation:outAnim 1s 1;
+                    -moz-animation:outAnim 1s 1;
+                    -webkit-animation:outAnim 1s 1;
+                    -o-animation:outAnim 1s 1;
+                    @keyframes outAnim {
+                        from{
+                            opacity: 1;
+                            transform: translate3d(0, $y, 0);
+
+                        }
+                        to{
+                            opacity: 0;
+                            transform: translate3d($x, $y, 0);
+                        }
+                    }
+                }
+                .header{
+                    font-size: 4em;
+                }
+                .footnote{
+                    font-size:1.25em;
+                }
+            }
         }
     }
 }
@@ -76,7 +147,7 @@
     opacity: 0;
 }
 
-// IN
+// Inner IMG Animation - Transition IN
 @keyframes container_anim_in
 {
     0% {
@@ -91,7 +162,7 @@
     }
 }
 
-// OUT
+// Inner IMG Animation - Transition OUT
 @keyframes container_anim_out
 {
     0% {
@@ -104,7 +175,7 @@
     }
 }
 
-// IN
+// Background IMG Animation - Transition IN
 @keyframes background_anim_in
 {
     0% {
@@ -119,7 +190,7 @@
     }
 }
 
-// OUT
+// Background IMG Animation - Transition OUT
 @keyframes background_anim_out
 {
     0% {
@@ -132,12 +203,14 @@
     }
 }
 
+// Wrapper Animation - Hide Frame
+// It is currently opacity 1 because we dont want the text to hide while all of the other animations do their magic
 @keyframes frame_hide
 {
-0% {
-    opacity: 1;
-}
-100% {
-    opacity: 1;
-}
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
 import { relative } from "path";
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 export default class SlideShowBanner extends Component{
     
@@ -17,13 +18,13 @@ export default class SlideShowBanner extends Component{
             ],
             text: [
                 {
-                    header: 'Hello', para: 'world'
+                    header: `Hello my name Jeff`, para: '- That guy from 22 Jump street'
                 },
                 {
-                    header: 'Goodbye', para: 'cruel world'
+                    header: `2 + 2 is 4 - 1 that's 3 Quick Mafs!`, para: `- Big Shaq`
                 },
                 {
-                    header: 'Suck', para: 'my balls'
+                    header: `Fuck everybody but me!`, para: '- Me'
                 }
             ]
         };
@@ -33,6 +34,15 @@ export default class SlideShowBanner extends Component{
     componentDidMount() {
         // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
+        var $t = this; 
+        this.timeOut();
+    }
+
+    timeOut(){
+        setTimeout(() => {
+            this.nextSlide();
+            this.timeOut();
+        }, 5000);
     }
 
     nextSlide(){
@@ -57,11 +67,12 @@ export default class SlideShowBanner extends Component{
 
                 {this.state.images.map((v,i)=>{
 
-                    let opacity = 1;
+                    let opacity = 0;
                     let wrapperClass = "SlideShowBanner";
                     let containerClasses = "";
                     let backgroundClasses = "SlideShowBanner__backgroundIMG";
-                    let innerIMGClass = "SlideShowBanner__container__innerIMG"
+                    let innerIMGClass = "SlideShowBanner__container__innerIMG";
+                    let textWrapper = "SlideShowBanner__container__content__text";
                     let zIndex;
 
                     if(this.loaded){
@@ -70,11 +81,24 @@ export default class SlideShowBanner extends Component{
                             innerIMGClass += " outAnim";
                             backgroundClasses += " outAnim"
                             wrapperClass += " hide";
+                            textWrapper += " outAnim";
                         }
                         else {
                             zIndex = 0;
                             innerIMGClass += " inAnim";
                             backgroundClasses += " inAnim";
+                            textWrapper += " inAnim";
+                        }
+                    }
+                    else{
+                        if (i !== this.state.slideIndex){
+                            // Prevent the animation from being seen 
+                            // but still present to hide slides
+                            zIndex = -1;
+                            innerIMGClass += " outAnim";
+                            backgroundClasses += " outAnim"
+                            wrapperClass += " hide";
+                            textWrapper += " outAnim";
                         }
                     }
 
@@ -94,20 +118,22 @@ export default class SlideShowBanner extends Component{
                                     backgroundSize: 'cover'
                                 }}
                             ></div>
-
+                            <div className="SlideShowBanner__overlay"></div>
                             <div className="SlideShowBanner__container">
                                 <div
                                     className={innerIMGClass}
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>
+                                
+
                                 <div className="SlideShowBanner__container__content">
-                                    {`#${this.state.text[i].header} ${this.state.text[i].para}`}
+                                    <div className={textWrapper}>
+                                        <div className="header">{`${this.state.text[i].header}`}</div>
+                                        <div className="footnote">{`${this.state.text[i].para}`}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     );
-
-
-
                 })}
             </div>
         )
