@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
-import { relative } from "path";
-// import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 export default class SlideShowBanner extends Component{
     
@@ -122,8 +120,16 @@ export default class SlideShowBanner extends Component{
 
                             {/* <div className="SlideShowBanner__overlay"></div> */}
 
+                            {/* Circle component */}
+
+                            <div className="absolute">
+                                <div className="SlideShowBanner__CircleContainer">
+                                    <div className="SlideShowBanner__CircleContainer__Circle"></div>
+                                </div>
+                            </div>
+
                             <div className="SlideShowBanner__container">
-                                
+
                                 {/* Inner Background IMG */}
                                 <div
                                     className={innerIMGClass}

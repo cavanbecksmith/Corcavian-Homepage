@@ -21,6 +21,47 @@
         -webkit-animation:frame_hide 1s 1;
         -o-animation:frame_hide 1s 1;
     }
+
+    // Hacky container for overlaying elements
+    .absolute{
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include Fullsize;
+    }
+
+    &__CircleContainer{
+        margin: 0 $sideMargin;
+        margin-top: $sideMargin;
+        margin-bottom: calc(#{$sideMargin} / 2);
+        position: relative;
+        width: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
+        height: calc(100% - 13.5rem);
+        // background: white;
+        // opacity: 0.5;
+        z-index: 1;
+        &__Circle{
+            position: absolute;
+            // // window height - padding top and bottom
+            // // 100vh - (4.5 + 9 = 13.5)
+            width: calc(100vh - (#{$sideMargin} + (#{$sideMargin} / 2)));
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            transform: translateX(-50%);
+        }
+        // position: absolute;
+        // background: white;
+        // border-radius: 50%;
+
+        // width: calc( 100vh - ((#{$sideMargin} / 2) + #{$sideMargin}) );
+        // height: 100%;
+        // left: 0;
+        // z-index: 1000;
+        // pointer-events: none;
+        // transform: translateX(-50%);
+    }
+
     &__backgroundIMG{
         position: absolute;
         top: 0;
