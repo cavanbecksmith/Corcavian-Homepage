@@ -14,3 +14,17 @@ $very-back: -1;
 
 // --- Margins & padding
 $sideMargin: 9rem;
+
+// $fontTest: "/src/sass/fonts/MajorMonoDisplay-Regular.ttf";
+
+// @font-face {
+//   font-family: 'Major Mono Display';
+// //   font-style: normal;
+// //   font-weight: normal;
+// //   src: url('#{$fontTest}');
+//   src: url(#{$fontTest});
+// }
+
+body{
+    // font-family: 'Major Mono Display', monospace !important;
+}

@@ -12,6 +12,11 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 module.exports = env => {
 
   return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'test'),
+      filename: 'main.js'
+    },
     module: {
       rules: [
         {
@@ -62,39 +67,16 @@ module.exports = env => {
             }
           ]
         },
-        // {
-        //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        //   use: [{
-        //     loader: 'file-loader',
-        //     options: {
-        //       name: '[name].[ext]',
-        //       outputPath: 'fonts/'
-        //     }
-        //   }]
-        // },
-        // {
-        //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        //   use: [{
-        //     loader: 'file-loader',
-        //     options: {
-        //       name: 'src/sass/fonts/[name].[ext]',
-        //       outputPath: 'dist/fonts/'
-        //     }
-        //   }]
-        // }
         {
-          test: /\.(eot|svg|ttf|woff|woff2)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: './src/sass/fonts/[name].[ext]',
-                outputPath: 'assets/fonts/'
-              }
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
             }
-          ]
+          }]
         }
-
       ]
     },
     resolve: {
