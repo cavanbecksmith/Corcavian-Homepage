@@ -7,6 +7,24 @@ let LogoWhite = require('assets/LogoWhite.png');
 
 export default class Navigation extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            burgerMenu: 'closed'
+        };
+        this.openBurger = this.openBurger.bind(this);
+    }
+
+    openBurger(){
+        console.log(this.state);
+        if(this.state.burgerMenu === 'closed'){
+            this.setState({burgerMenu: 'open'})
+        }
+        else{
+            this.setState({burgerMenu: 'closed'})
+        }
+    }
+
     render(){
         return (
             <div className="Nav">
@@ -23,7 +41,15 @@ export default class Navigation extends Component {
                         <li>Contact</li>
                     </ul>
                 </div>
-                <div className="Nav__burger"></div>
+                <div className="Nav__burger">
+                
+                    <div className={`Nav__burger__icon ${this.state.burgerMenu}`} onClick={this.openBurger}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                </div>
             </div>
         );
     }
