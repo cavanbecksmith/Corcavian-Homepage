@@ -15,9 +15,6 @@
             width: auto;
             height: 80%;
         }
-        // @media (max-width: $sm-width) {
-        //     width: 33%;
-        // }
     }
 
     &__burger{
@@ -25,14 +22,11 @@
         height: $sideMargin;
         position: fixed;
         right: 0;
-        // @media (max-width: $sm-width) {
-        //     width: 33%;
-        // }
     }
 
     &__links{
         position: absolute;
-        width: $sideMargin;
+        width: 100%;
         height: $sideMargin;
         right: 0;
         padding-right: $sideMargin;
@@ -46,7 +40,7 @@
             align-items: center;
             height: 100%;
             li{
-                font-size: 23px;
+                font-size: 20px;
                 padding-right: 2rem;
                 font-family: 'Open Sans Condensed', sans-serif;
                 color: white;

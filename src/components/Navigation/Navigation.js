@@ -17,9 +17,9 @@ export default class Navigation extends Component {
                 <div className="Nav__links">
                     <ul>
                         <li>Home</li>
-                        <li>About me :P</li>
-                        <li>Services</li>
-                        <li>Tools</li>
+                        <li>About us</li>
+                        <li>What we offer</li>
+                        <li>Showcase</li>
                         <li>Contact</li>
                     </ul>
                 </div>

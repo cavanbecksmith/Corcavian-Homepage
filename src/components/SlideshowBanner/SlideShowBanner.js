@@ -14,17 +14,17 @@ export default class SlideShowBanner extends Component{
             images: [
                 require('assets/slideshow/img_01.jpg'),
                 require('assets/slideshow/img_02.jpg'),
-                require('assets/slideshow/img_03.jpg'),
+                require('assets/slideshow/img_03.jpg')
             ],
             text: [
                 {
-                    header: `Hello my name Jeff`, para: '- That guy from 22 Jump street'
+                    header: `Welcome to Corcavian!`, para: '- We are designers, developers, new guys on the block and enthusiasts but most of all we make things happen.'
                 },
                 {
-                    header: `2 + 2 is 4 - 1 that's 3 Quick Mafs!`, para: `- Big Shaq`
+                    header: `We strive for a better tommorow.`, para: `- We make sure that we put 100% passion into our work to make sure you'll leave with a smile on your face.`
                 },
                 {
-                    header: `Hello world something goes here!`, para: '- Me'
+                    header: `The Devil's in the details.`, para: '- In our work we will take the time to focus on even the smallest and most intricate details to ensure that your product is nothing but pristine perfect.'
                 }
             ]
         };
