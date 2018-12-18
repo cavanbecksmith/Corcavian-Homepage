@@ -11,7 +11,7 @@ export const FullScreenPanel = (props)=> {
         lineHeight: props.lineHeight
     }
 
-    let classN = "FullScreenPanel" + (props.halfH ? " halfH" : "");
+    let classN = "FullScreenPanel" + (props.banner ? " bannerCollapse" : "");
 
     return (
         <div className={classN} style={styles}>

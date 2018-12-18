@@ -34,7 +34,7 @@ export default class SlideShowBanner extends Component{
     componentDidMount() {
         // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
-        // this.timeOut();
+        this.timeOut();
     }
 
     timeOut(){
@@ -119,19 +119,25 @@ export default class SlideShowBanner extends Component{
                                     backgroundSize: 'cover'
                                 }}
                             ></div>
-                            <div className="SlideShowBanner__overlay"></div>
+
+                            {/* <div className="SlideShowBanner__overlay"></div> */}
+
                             <div className="SlideShowBanner__container">
+                                
+                                {/* Inner Background IMG */}
                                 <div
                                     className={innerIMGClass}
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>
                                 
-
+                                {/* RHS Content */}
                                 <div className="SlideShowBanner__container__content">
                                     <div className={textWrapper}>
                                         <div className="header">{`${this.state.text[i].header}`}</div>
                                         <div className="footnote">{`${this.state.text[i].para}`}</div>
                                     </div>
                                 </div>
+                                {/*  */}
+
                             </div>
                         </div>
                     );
