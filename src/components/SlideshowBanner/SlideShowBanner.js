@@ -56,9 +56,35 @@ export default class SlideShowBanner extends Component{
         }
     }
 
+
+    previousSlide() {
+
+        if (this.state.slideIndex === -1) {
+            this.setState({
+                slideIndex: this.state.images.length - 1
+            });
+        }
+        else {
+            this.setState({
+                slideIndex: this.state.slideIndex - 1
+            });
+        }
+    }
+
     render(){
         return(
             <div className="SlideShowWrapper">
+
+                <div className="absolute">
+                    <div className="SlideShowBanner__CircleContainer">
+                        <div className="SlideShowBanner__CircleContainer__Circle">
+                        
+                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Next"></div>
+                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Previous"></div>
+
+                        </div>
+                    </div>
+                </div>
 
                 {this.props.children}
 
@@ -121,12 +147,6 @@ export default class SlideShowBanner extends Component{
                             {/* <div className="SlideShowBanner__overlay"></div> */}
 
                             {/* Circle component */}
-
-                            <div className="absolute">
-                                <div className="SlideShowBanner__CircleContainer">
-                                    <div className="SlideShowBanner__CircleContainer__Circle"></div>
-                                </div>
-                            </div>
 
                             <div className="SlideShowBanner__container">
 

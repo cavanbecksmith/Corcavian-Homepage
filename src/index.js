@@ -9,7 +9,9 @@ import './index.scss';
 class App extends Component {
   render() {
     return (
-      <div className="wrapper">
+      <div className="wrapper" style={{backgroundColor: 'black'}}>
+        <span className="fas fa-igloo" style={{ color: 'white', fontSize: "72px" }}></span>
+
         <GuideLines></GuideLines>
         <FullScreenPanel bk="#fff" banner="true">
           <Navigation></Navigation>

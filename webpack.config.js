@@ -48,7 +48,7 @@ module.exports = env => {
             {
               loader: 'sass-resources-loader',
               options: {
-                resources: ['./src/sass/vars.scss', './src/sass/mixins.scss']
+                resources: ['./src/sass/vars.scss', './src/sass/mixins.scss', './src/sass/mixins.scss', './src/sass/fontawesome/fontawesome.scss']
               },
             },
           ]
@@ -61,7 +61,40 @@ module.exports = env => {
               options: {}
             }
           ]
+        },
+        // {
+        //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        //   use: [{
+        //     loader: 'file-loader',
+        //     options: {
+        //       name: '[name].[ext]',
+        //       outputPath: 'fonts/'
+        //     }
+        //   }]
+        // },
+        // {
+        //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        //   use: [{
+        //     loader: 'file-loader',
+        //     options: {
+        //       name: 'src/sass/fonts/[name].[ext]',
+        //       outputPath: 'dist/fonts/'
+        //     }
+        //   }]
+        // }
+        {
+          test: /\.(eot|svg|ttf|woff|woff2)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: './src/sass/fonts/[name].[ext]',
+                outputPath: 'assets/fonts/'
+              }
+            }
+          ]
         }
+
       ]
     },
     resolve: {
@@ -69,6 +102,7 @@ module.exports = env => {
         assets: path.resolve(__dirname, 'src/assets'),
       }
     },
+
     plugins: [htmlWebpackPlugin]
   }
 };
