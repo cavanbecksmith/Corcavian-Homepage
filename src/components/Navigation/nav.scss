@@ -2,7 +2,7 @@
 
 .Nav{
     position: relative;
-    z-index: $front;
+    z-index: 1000;
     &__logo{
         width: $sideMargin;
         height: $sideMargin;

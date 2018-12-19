@@ -1,7 +1,6 @@
 $bk: blue;
 
 body, html{
-	height: 100%;
 	font-size: 20px; /* Controls the guideline size */
 	@media (max-width: $xxl-width) { /* 1600px */ 
 		font-size: 16px;
@@ -12,15 +11,14 @@ body, html{
 	@media (max-width: $sm-width){ /* 500px */
 		font-size: 7px;
 	}
-	#root{
-		@include Fullsize;
-		.wrapper{
-			@include Fullsize;	
-		}
-	}
 }
 
 body{
 	padding: 0;
 	margin: 0;
+}
+
+main{
+	padding-top: $sideMargin;
+	height: 3000px;
 }

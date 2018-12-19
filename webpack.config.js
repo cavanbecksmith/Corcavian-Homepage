@@ -85,6 +85,7 @@ module.exports = env => {
     resolve: {
       alias: {
         assets: path.resolve(__dirname, 'src/assets'),
+        css: path.resolve(__dirname, 'src/css'),
       }
     },
 

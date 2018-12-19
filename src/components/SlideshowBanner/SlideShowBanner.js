@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
+import "css/fontawesome.css";
 
 export default class SlideShowBanner extends Component{
     
@@ -79,8 +80,13 @@ export default class SlideShowBanner extends Component{
                     <div className="SlideShowBanner__CircleContainer">
                         <div className="SlideShowBanner__CircleContainer__Circle">
                         
-                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Next"></div>
-                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Previous"></div>
+                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Previous">
+                                <span className="fa fa-long-arrow-left"></span>
+                            </div>
+
+                            <div className="SlideShowBanner__CircleContainer__Circle__Arrow Next">
+                                <span className="fa fa-long-arrow-right"></span>
+                            </div>
 
                         </div>
                     </div>

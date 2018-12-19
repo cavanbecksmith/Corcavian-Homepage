@@ -2,7 +2,7 @@
     background: black;
     overflow: hidden;
     position: relative;
-    @include Fullsize;
+    height: 100vh;
 
     // Hacky container for overlaying elements
     .absolute{
@@ -39,7 +39,7 @@
         position: relative;
         width: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
         height: calc(100% - 13.5rem);
-        z-index: 1;
+        z-index: 10;
         @media (max-width: $md-width) { /* 500px */
             display: none;
         }
@@ -53,13 +53,25 @@
             border: 1px solid white;
             transform: translateX(-50%);
             &__Arrow{
+                $p: 70px;
                 position: absolute;
-                width: 100%;
+                width: 50%;
                 height: 20px;
-                background: white;
+                // background: white;
                 top: 50%;
-                &__Next{}
-                &__Previous{}
+                color: white;
+                font-size: 50px;
+                box-sizing: border-box;
+                &.Next{
+                    left: 50%;
+                    text-align: left;
+                    padding-left: $p;
+                }
+                &.Previous{
+                    left: 0;
+                    text-align: right;
+                    padding-right: $p;
+                }
             }
         }
     }
@@ -246,12 +258,13 @@
 {
     0% {
         opacity: 0;
-        transform: rotate(15deg) scale(2);
+        transform: rotate(15deg) scale(3);
     }
-    20%{
-        opacity: 1;
-    }
+    // 20%{
+        
+    // }
     100% {
+        opacity: 1;
         transform: rotate(0deg);
     }
 }
@@ -274,13 +287,13 @@
 {
     0% {
         opacity: 0;
-        transform: rotate(5deg) scale(1.2);
+        transform: rotate(5deg) scale(2);
     }
     // 20%{
     // }
     100% {
         opacity: 1;
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
     }
 }
 
