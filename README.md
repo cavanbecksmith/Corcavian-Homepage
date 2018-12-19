@@ -1,6 +1,5 @@
 # Corcavian Homepage
-I am building a homepage based on some site I saw because it "inspired" me... Nothing else
-Take a look, steal my code! what's mine is now yours :P
+This is the front page for Corcavian website
 
 ## Instructions
 
