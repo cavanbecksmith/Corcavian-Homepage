@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper" style={{backgroundColor: 'black'}}>
-        <span className="fas fa-igloo" style={{ color: 'white', fontSize: "100px", fontFamily: "'Font Awesome 5 Free'"}}></span>
+        {/* <span className="fas fa-igloo" style={{ color: 'white', fontSize: "100px", fontFamily: "'Font Awesome 5 Free'"}}></span> */}
 
         <GuideLines></GuideLines>
         <FullScreenPanel bk="#fff" banner="true">

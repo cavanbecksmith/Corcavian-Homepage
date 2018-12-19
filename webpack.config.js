@@ -5,7 +5,8 @@ const webpack = require('webpack');
 console.log(path.resolve);
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
+  // template: "./src/index.html",
+  template: path.resolve(__dirname, 'src', 'index.html'),
   filename: "./index.html"
 });
 
@@ -14,7 +15,7 @@ module.exports = env => {
   return {
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname, 'test'),
+      path: path.resolve(__dirname, 'dist'),
       filename: 'main.js'
     },
     module: {
@@ -63,7 +64,9 @@ module.exports = env => {
           use: [
             {
               loader: 'file-loader',
-              options: {}
+              options: {
+                outputPath: 'images/'
+              }
             }
           ]
         },
