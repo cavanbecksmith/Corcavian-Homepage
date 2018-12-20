@@ -9,6 +9,7 @@ export default class SlideShowBanner extends Component{
         super(props);
         this.loaded = false;
         this.state = {
+            // offsetY: null,
             slideIndex: 0,
             images: [
                 require('assets/slideshow/img_01.jpg'),
@@ -27,15 +28,24 @@ export default class SlideShowBanner extends Component{
                 }
             ]
         };
+        this.innerIMG = React.createRef();
         this.nextSlide = this.nextSlide.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
         // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
         this.timeOut();
+
+        // --- Scrolling Stuff
+        // window.addEventListener('scroll', this.handleScroll);
     }
 
+    componentWillUnmount() {
+        // window.removeEventListener('scroll', this.handleScroll);
+    }
+    
     timeOut(){
         setTimeout(() => {
             this.nextSlide();
@@ -55,6 +65,13 @@ export default class SlideShowBanner extends Component{
                 slideIndex: this.state.slideIndex + 1
             });
         }
+
+    }
+
+    // SCROLL
+    handleScroll(){
+        console.log('Scroll', window.pageYOffset, this.innerIMG);
+        let translate3d;
     }
 
 
@@ -108,7 +125,7 @@ export default class SlideShowBanner extends Component{
                 {this.state.images.map((v,i)=>{
 
                     let opacity = 0;
-                    let wrapperClass = "SlideShowBanner";
+                    let wrapperClass = "SlideShowBanner parallax";
                     let containerClasses = "";
                     let backgroundClasses = "SlideShowBanner__backgroundIMG";
                     let innerIMGClass = "SlideShowBanner__container__innerIMG";
@@ -168,7 +185,8 @@ export default class SlideShowBanner extends Component{
                                 {/* Inner Background IMG */}
                                 <div
                                     className={innerIMGClass}
-                                    style={{backgroundImage: `url(${this.state.images[i]})`,}}></div>
+                                    style={{backgroundImage: `url(${this.state.images[i]})`,}}
+                                    ref={this.innerIMG}></div>
                                 
                                 {/* RHS Content */}
                                 <div className="SlideShowBanner__container__content">
