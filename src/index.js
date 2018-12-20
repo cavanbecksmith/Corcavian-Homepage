@@ -9,12 +9,6 @@ import './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 
-// require('./js/TweenMaxSmoothScroll');
-// require('./js/SmoothScroll');
-// console.log(SmoothScroll);
-
-// import "./js/jQueryScrollspeed.js";
-
 class App extends Component {
 
   componentDidMount(){}

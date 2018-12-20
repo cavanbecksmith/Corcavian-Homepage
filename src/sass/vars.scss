@@ -4,6 +4,8 @@ $xl-width: 1100px;
 $lg-width: 900px;
 $md-width: 800px;
 $sm-width: 500px;
+$smallBanner-width: 1000px;
+$smallBanner-height: 580px;
 
 // --- Background z-index
 $very-front: 3;
@@ -14,17 +16,3 @@ $very-back: -1;
 
 // --- Margins & padding
 $sideMargin: 9rem;
-
-// $fontTest: "/src/sass/fonts/MajorMonoDisplay-Regular.ttf";
-
-// @font-face {
-//   font-family: 'Major Mono Display';
-// //   font-style: normal;
-// //   font-weight: normal;
-// //   src: url('#{$fontTest}');
-//   src: url(#{$fontTest});
-// }
-
-body{
-    // font-family: 'Major Mono Display', monospace !important;
-}

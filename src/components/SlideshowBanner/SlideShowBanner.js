@@ -76,6 +76,15 @@ export default class SlideShowBanner extends Component{
         return(
             <div className="SlideShowWrapper">
 
+                <div className="mobileControls">
+                    <div className="mobileControls__arrow Previous">
+                        <span className="fa fa-long-arrow-left"></span>
+                    </div>
+                    <div className="mobileControls__arrow Next">
+                        <span className="fa fa-long-arrow-right"></span>
+                    </div>
+                </div>
+
                 <div className="absolute">
                     <div className="SlideShowBanner__CircleContainer">
                         <div className="SlideShowBanner__CircleContainer__Circle">
