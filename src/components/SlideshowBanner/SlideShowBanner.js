@@ -37,15 +37,8 @@ export default class SlideShowBanner extends Component{
         // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
         this.timeOut();
-
-        // --- Scrolling Stuff
-        // window.addEventListener('scroll', this.handleScroll);
     }
 
-    componentWillUnmount() {
-        // window.removeEventListener('scroll', this.handleScroll);
-    }
-    
     timeOut(){
         setTimeout(() => {
             this.nextSlide();

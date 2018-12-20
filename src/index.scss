@@ -20,6 +20,48 @@ body{
 }
 
 main{
-	padding-top: $sideMargin;
-	height: 3000px;
+	padding-top: 9rem;
+	// font-family: 'Raleway', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+
+	h1{
+		font-size: 4rem;
+		line-height: 4.5rem; 
+		color: $dark-grey;
+		@media (max-width: $md-width) {
+			font-size: 3rem;
+		}
+	}
+
+	p{
+		color: $dark-grey;
+		font-size: 1.25rem;
+		line-height: 2rem; 
+	}
+
 }
+
+.container{
+	margin: 0 $sideMargin;
+	&__cell{
+		position: relative;
+		width: 50%;
+		&.left{
+			margin-right: 50%;
+		}
+		&.right{
+			margin-left: 50%;
+		}
+		&.fullW{
+			width: 100%;
+		}
+		@media (max-width: $xl-width) {
+			display: block;
+			width: 100% !important;
+			margin-right: 0 !important;
+			margin-left: 0 !important;
+		}
+	}
+
+}
+

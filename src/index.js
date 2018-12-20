@@ -16,11 +16,25 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper" style={{ backgroundColor: 'black' }}>
+      <div className="wrapper">
         <GuideLines></GuideLines>
         <Navigation></Navigation>
         <SlideShowBanner></SlideShowBanner>
-        {/* <SlideShowBanner></SlideShowBanner> */}
+
+        <main>
+          <div className="container">
+            <div className="container__cell left">
+              <h1 className="strokeThrough">A little Bit About Us at Corcavian</h1>
+            </div>
+            <div className="container__cell right">
+              <p>Corcavian is a new Business venture in which myself Cavan Becksmith has created to be able to share my creative know how and expertise to clients wanting a fast reliable premium service</p>
+            </div>
+            <div className="container__cell fullW">
+              {/* <h1>Something Goes Here</h1> */}
+            </div>
+          </div>
+        </main>
+
       </div>
     );
   }
