@@ -5,6 +5,7 @@ import GuideLines from './components/GuideLines/GuideLines';
 import SlideShowBanner from './components/SlideshowBanner/SlideShowBanner';
 import {FullScreenPanel} from './components/Helpers/FullscreenPanel.js';
 import $ from 'jquery';
+window.$ = $;
 import './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
@@ -21,18 +22,22 @@ class App extends Component {
         <Navigation></Navigation>
         <SlideShowBanner></SlideShowBanner>
 
-        <main>
+        <main style={{position: 'relative'}}>
           <div className="container">
             <div className="container__cell left">
-              <h1 className="strokeThrough">A little Bit About Us at Corcavian</h1>
+              <h1>A little Bit About Us at <span style={{ position: 'relative' }}><span data-depth="1.25" className="strokeThrough parallax relative" style={{ position: 'relative' }}>Corcavian</span></span></h1>
             </div>
             <div className="container__cell right">
-              <p>Corcavian is a new Business venture in which myself Cavan Becksmith has created to be able to share my creative know how and expertise to clients wanting a fast reliable premium service</p>
+              <p>At Corcavian we are at the forefront of new technolgies and design techniques. We use a variety of new web technolgies such as React, SASS, CANVAS HTML5 and many frameworks such as Bootstrap and Wordpress.</p>
             </div>
             <div className="container__cell fullW">
               {/* <h1>Something Goes Here</h1> */}
             </div>
           </div>
+
+
+          <div style={{height: '5000px', background: 'black'}}></div>
+
         </main>
 
       </div>
@@ -45,6 +50,7 @@ $(document).ready(()=>{
 });
 
 $(window).on('load scroll', function(){
+  console.log('Scroll');
   var scrollTop = window.pageYOffset;
   Parallax(scrollTop);
 });
