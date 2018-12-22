@@ -6,10 +6,12 @@ import SlideShowBanner from './components/SlideshowBanner/SlideShowBanner';
 import {FullScreenPanel} from './components/Helpers/FullscreenPanel.js';
 import $ from 'jquery';
 window.$ = $;
-import './index.scss';
+import Style from './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 import { Parallax, $$, isInView, percentageScrolled } from "./js/Helpers";
+
+console.log(Style);
 
 class App extends Component {
 

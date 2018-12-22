@@ -1,5 +1,9 @@
 $bk: blue;
 
+:export {
+	test: $bk;
+}
+
 body, html{
 	font-size: 20px; /* Controls the guideline size */
 	@media (max-width: $xxl-width) { /* 1600px */ 
