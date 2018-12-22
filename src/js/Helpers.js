@@ -20,8 +20,6 @@ export function Parallax(scrollTop) {
             }
         }
 
-        // console.log(initialPositions);
-
         if(el.classList.contains('relative')){
 
             var p = 0;
@@ -45,8 +43,6 @@ export function Parallax(scrollTop) {
             var pin = elTop + startPin;
             var limit = elTop + el.offsetHeight;
             var t = (scrollTop - elTop) * depth;
-
-            // console.log(elTop);
 
             if (scrollTop > pin && scrollTop <= limit) {
                 if (background) {
@@ -99,7 +95,7 @@ export function $$(selector, context) {
 
 
 /**
-* returns the relative position of an element regardless of position/float issues
+* returns the el position relative to the top
 * @param {HTMLElement} el - element to return position for
 * @returns {object} { x: num, y: num }
 */
@@ -114,3 +110,37 @@ export function getRelativePosition(el){
     }
 
 }
+
+
+export const isInView = (el, offset, scrollTop) => {
+
+    el = document.querySelector(el);
+    var elPos = getRelativePosition(el).y;
+    var elHeight = el.getBoundingClientRect().height;
+    var limit =  elPos + elHeight;
+    if (scrollTop > (elPos - offset) && scrollTop <= (limit + offset)) {
+        console.log('Element is in view');
+    }
+}
+
+export const percentageScrolled =  (scrollTop) =>{
+
+    // w/o taking the innerH off the percentage wouldn't be correct
+    let pageHeight = scrollDetails().pageHeight - window.innerHeight;
+
+    console.log(((scrollTop) / pageHeight) * 100);
+    // e.g 300 / 6000 = 0.05
+
+};
+
+
+export const scrollDetails = () => {
+
+    document.querySelector('body').style.height = document.querySelector('html').offsetHeight;
+    console.log('body height')
+    console.log(document.querySelector('body').style.height);
+    return {
+        pageHeight: document.querySelector('html').offsetHeight,
+        pageWidth: document.querySelector('html').offsetWidth
+    }
+};

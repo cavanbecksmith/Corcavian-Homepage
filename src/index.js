@@ -9,7 +9,7 @@ window.$ = $;
 import './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
-import {Parallax, $$} from "./js/Helpers";
+import { Parallax, $$, isInView, percentageScrolled } from "./js/Helpers";
 
 class App extends Component {
 
@@ -25,7 +25,7 @@ class App extends Component {
         <main style={{position: 'relative'}}>
           <div className="container">
             <div className="container__cell left">
-              <h1>A little Bit About Us at <span style={{ position: 'relative' }}><span data-depth="1.25" className="strokeThrough parallax relative" style={{ position: 'relative' }}>Corcavian</span></span></h1>
+              <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
             <div className="container__cell right">
               <p>At Corcavian we are at the forefront of new technolgies and design techniques. We use a variety of new web technolgies such as React, SASS, CANVAS HTML5 and many frameworks such as Bootstrap and Wordpress.</p>
@@ -50,8 +50,13 @@ $(document).ready(()=>{
 });
 
 $(window).on('load scroll', function(){
-  console.log('Scroll');
   var scrollTop = window.pageYOffset;
+  var scrollPerc = percentageScrolled(scrollTop);
+  Parallax(scrollTop);
+  isInView('.strokeThrough', 500, scrollTop);
+});
+
+$(window).on('resize', function () {
   Parallax(scrollTop);
 });
 
