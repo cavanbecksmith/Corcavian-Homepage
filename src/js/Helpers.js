@@ -112,13 +112,17 @@ export function getRelativePosition(el){
 }
 
 
-export const isInView = (el, offset, scrollTop) => {
+export const isInView = (el, scrollTop) => {
     el = document.querySelector(el);
     let elPos = getRelativePosition(el).y;
     let elHeight = el.getBoundingClientRect().height;
     let limit =  elPos + elHeight;
-    if (scrollTop > (elPos - offset) && scrollTop <= (limit)) {
-        console.log('Element is in view');
+    var screenSize = window.screen.height;
+    if (scrollTop > (elPos - screenSize) && scrollTop <= limit) {// console.log('Element is in view');
+        return true;
+    }
+    else {
+        return false;
     }
 }
 

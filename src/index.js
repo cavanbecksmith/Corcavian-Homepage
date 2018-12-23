@@ -57,7 +57,7 @@ $(window).on('load scroll', function(){
   // console.log(screenSize);
   // console.log('Window Height:', windowH, 'Scroll Top:', scrollTop);
   Parallax(scrollTop);
-  isInView('.strokeThrough', screenSize, scrollTop);
+  isInView('.strokeThrough', scrollTop);
 });
 
 $(window).on('resize', function () {
