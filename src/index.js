@@ -54,6 +54,7 @@ $(document).ready(()=>{
 $(window).on('load scroll', function(){
   var scrollTop = window.pageYOffset;
   var scrollPerc = percentageScrolled(scrollTop);
+  console.log(scrollPerc);
   Parallax(scrollTop);
   isInView('.strokeThrough', 500, scrollTop);
 });

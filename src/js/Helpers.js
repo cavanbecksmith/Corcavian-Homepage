@@ -2,13 +2,13 @@ export let initialPositions = [];
 
 export function Parallax(scrollTop) {
     $$(".parallax").forEach(function (el, index, array) {
-        var depth = Number(el.getAttribute('data-depth')) || 0.25;
-        var background = el.getAttribute('data-background');
-        var x = el.getAttribute('data-x') || 0;
-        var offsetY = el.getAttribute('data-offsetY') || 0;
-        var startPin = Number(el.getAttribute('data-pin')) || 0;
-        // var isRelative = Number(el.getAttribute('data-relative')) || false;
-        var translate3d;
+        let depth = Number(el.getAttribute('data-depth')) || 0.25;
+        let background = el.getAttribute('data-background');
+        let x = el.getAttribute('data-x') || 0;
+        let offsetY = el.getAttribute('data-offsetY') || 0;
+        let startPin = Number(el.getAttribute('data-pin')) || 0;
+        // let isRelative = Number(el.getAttribute('data-relative')) || false;
+        let translate3d;
 
 
         if ( !el.classList.contains('relative') ){
@@ -22,11 +22,11 @@ export function Parallax(scrollTop) {
 
         if(el.classList.contains('relative')){
 
-            var p = 0;
-            var elTop = initialPositions[index].elTop;
-            var pin = elTop + startPin;
-            var limit = elTop + initialPositions[index].elHeight + p;
-            var t = (scrollTop - elTop) * depth;
+            let p = 0;
+            let elTop = initialPositions[index].elTop;
+            let pin = elTop + startPin;
+            let limit = elTop + initialPositions[index].elHeight + p;
+            let t = (scrollTop - elTop) * depth;
 
             if (scrollTop > pin && scrollTop <= limit) {
                 el.style.top = t + "px";
@@ -39,10 +39,10 @@ export function Parallax(scrollTop) {
         }
         else{
 
-            var elTop = getPosition(el).y;
-            var pin = elTop + startPin;
-            var limit = elTop + el.offsetHeight;
-            var t = (scrollTop - elTop) * depth;
+            let elTop = getPosition(el).y;
+            let pin = elTop + startPin;
+            let limit = elTop + el.offsetHeight;
+            let t = (scrollTop - elTop) * depth;
 
             if (scrollTop > pin && scrollTop <= limit) {
                 if (background) {
@@ -73,7 +73,7 @@ export function Parallax(scrollTop) {
 */
 export function getPosition(el) {
 
-    var x = 0,
+    let x = 0,
         y = 0;
 
     while (el != null && (el.tagName || '').toLowerCase() != 'html') {
@@ -89,7 +89,7 @@ export function getPosition(el) {
 //Query All Helper - Transforms NodeList to array
 export function $$(selector, context) {
     context = context || document;
-    var elements = context.querySelectorAll(selector);
+    let elements = context.querySelectorAll(selector);
     return Array.prototype.slice.call(elements);
 }
 
@@ -113,11 +113,10 @@ export function getRelativePosition(el){
 
 
 export const isInView = (el, offset, scrollTop) => {
-
     el = document.querySelector(el);
-    var elPos = getRelativePosition(el).y;
-    var elHeight = el.getBoundingClientRect().height;
-    var limit =  elPos + elHeight;
+    let elPos = getRelativePosition(el).y;
+    let elHeight = el.getBoundingClientRect().height;
+    let limit =  elPos + elHeight;
     if (scrollTop > (elPos - offset) && scrollTop <= (limit + offset)) {
         console.log('Element is in view');
     }
@@ -127,17 +126,18 @@ export const percentageScrolled =  (scrollTop) =>{
 
     // w/o taking the innerH off the percentage wouldn't be correct
     let pageHeight = scrollDetails().pageHeight - window.innerHeight;
+    const percScrolled = (scrollTop / pageHeight) * 100;
 
-    console.log(((scrollTop) / pageHeight) * 100);
+    console.log(percScrolled);
+
+    return percScrolled;
     // e.g 300 / 6000 = 0.05
 
 };
 
 
 export const scrollDetails = () => {
-
-    document.querySelector('body').style.height = document.querySelector('html').offsetHeight;
-    console.log('body height')
+    // document.querySelector('body').style.height = document.querySelector('html').offsetHeight + 'px';
     console.log(document.querySelector('body').style.height);
     return {
         pageHeight: document.querySelector('html').offsetHeight,

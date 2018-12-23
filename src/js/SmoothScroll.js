@@ -18,7 +18,7 @@ function SmoothScroll(target, speed, smooth) {
         var delta = normalizeWheelDelta(e)
 
         pos += -delta * speed
-        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight)) // limit scrolling
+        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight + 11)) // limit scrolling BTW THE +11px is a Hack bc that's how much of the page I cant scroll
 
         if (!moving) update()
     }

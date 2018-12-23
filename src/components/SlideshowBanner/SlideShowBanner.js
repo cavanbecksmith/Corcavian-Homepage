@@ -18,23 +18,24 @@ export default class SlideShowBanner extends Component{
             ],
             text: [
                 {
-                    header: `Welcome to Corcavian!`, para: '- We are designers, developers, new guys on the block and enthusiasts but most of all we make things happen.'
+                    header: `Welcome to Corcavian!`, 
+                    para: '- We are designers, developers, new guys on the block and enthusiasts but most of all we make things happen.'
                 },
                 {
-                    header: `We strive for a better tommorow.`, para: `- We make sure that we put 100% passion into our work to make sure you'll leave with a smile on your face.`
+                    header: `We strive for a better tommorow.`,
+                    para: `- We make sure that we put 100% passion into our work to make sure you'll leave with a smile on your face.`
                 },
                 {
-                    header: `The Devil's in the details.`, para: '- In our work we will take the time to focus on even the smallest and most intricate details to ensure that your product is nothing but pristine perfect.'
+                    header: `The Devil's in the details.`, 
+                    para: '- In our work we will take the time to focus on even the smallest and most intricate details to ensure that your product is nothing but pristine perfect.'
                 }
             ]
         };
         this.innerIMG = React.createRef();
         this.nextSlide = this.nextSlide.bind(this);
-        this.handleScroll = this.handleScroll.bind(this);
     }
 
     componentDidMount() {
-        // --- Prevents the animation from running before the component has mounted
         this.loaded = true;
         this.timeOut();
     }
@@ -60,13 +61,6 @@ export default class SlideShowBanner extends Component{
         }
 
     }
-
-    // SCROLL
-    handleScroll(){
-        console.log('Scroll', window.pageYOffset, this.innerIMG);
-        let translate3d;
-    }
-
 
     previousSlide() {
 
