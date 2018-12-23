@@ -131,7 +131,7 @@
     &__container{
         margin: 0 $sideMargin;
         margin-top: $sideMargin;
-        height: calc(100% - (#{$sideMargin} + (#{$sideMargin} / 2)));
+        height: calc(100% - (#{$sideMargin} ));
         position: relative;
         overflow: hidden;
         @media (max-width: $md-width) { /* 700px */

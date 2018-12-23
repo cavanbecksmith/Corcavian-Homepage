@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 const webpack = require('webpack');
 
@@ -9,6 +10,17 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: path.resolve(__dirname, 'src', 'index.html'),
   filename: "./index.html"
 });
+
+const copyWebpackPlugin = new CopyWebpackPlugin([
+  {
+    from: 'src/fonts',
+    to: 'fonts',
+  },
+  {
+    from: 'src/css',
+    to: 'css',
+  }
+])
 
 module.exports = env => {
 
@@ -42,6 +54,9 @@ module.exports = env => {
             },
             {
               loader: "css-loader",
+              options: {
+                outputPath: 'css'
+              }
             }
           ]
         },
@@ -89,6 +104,6 @@ module.exports = env => {
       }
     },
 
-    plugins: [htmlWebpackPlugin]
+    plugins: [htmlWebpackPlugin, copyWebpackPlugin]
   }
 };
