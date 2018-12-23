@@ -9,9 +9,7 @@ window.$ = $;
 import Style from './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
-import { Parallax, $$, isInView, percentageScrolled } from "./js/Helpers";
-
-console.log(Style);
+import { Parallax, $$, isInView, percentageScrolled, scrollDetails } from "./js/Helpers";
 
 class App extends Component {
 
@@ -52,11 +50,14 @@ $(document).ready(()=>{
 });
 
 $(window).on('load scroll', function(){
-  var scrollTop = window.pageYOffset;
-  var scrollPerc = percentageScrolled(scrollTop);
-  console.log(scrollPerc);
+  let scrollTop = window.pageYOffset;
+  let scrollPerc = percentageScrolled(scrollTop);
+  let windowH = scrollDetails().pageHeight;
+  var screenSize = window.screen.height;
+  // console.log(screenSize);
+  // console.log('Window Height:', windowH, 'Scroll Top:', scrollTop);
   Parallax(scrollTop);
-  isInView('.strokeThrough', 500, scrollTop);
+  isInView('.strokeThrough', screenSize, scrollTop);
 });
 
 $(window).on('resize', function () {

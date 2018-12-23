@@ -117,30 +117,24 @@ export const isInView = (el, offset, scrollTop) => {
     let elPos = getRelativePosition(el).y;
     let elHeight = el.getBoundingClientRect().height;
     let limit =  elPos + elHeight;
-    if (scrollTop > (elPos - offset) && scrollTop <= (limit + offset)) {
+    if (scrollTop > (elPos - offset) && scrollTop <= (limit)) {
         console.log('Element is in view');
     }
 }
 
 export const percentageScrolled =  (scrollTop) =>{
 
-    // w/o taking the innerH off the percentage wouldn't be correct
-    let pageHeight = scrollDetails().pageHeight - window.innerHeight;
+    let pageHeight = scrollDetails().pageHeight ;
     const percScrolled = (scrollTop / pageHeight) * 100;
-
-    console.log(percScrolled);
 
     return percScrolled;
     // e.g 300 / 6000 = 0.05
-
 };
 
 
 export const scrollDetails = () => {
-    // document.querySelector('body').style.height = document.querySelector('html').offsetHeight + 'px';
-    console.log(document.querySelector('body').style.height);
-    return {
-        pageHeight: document.querySelector('html').offsetHeight,
-        pageWidth: document.querySelector('html').offsetWidth
+    return { // w/o taking the innerH off the percentage wouldn't be correct
+        pageHeight: document.querySelector('html').offsetHeight - window.innerHeight,
+        pageWidth: document.querySelector('html').offsetWidth - window.innerWidth
     }
 };

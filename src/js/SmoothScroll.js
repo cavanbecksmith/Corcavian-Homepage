@@ -8,17 +8,18 @@ export default function SmoothScrolling(scrollSpeed, smooth) {
 function SmoothScroll(target, speed, smooth) {
     if (target == document)
         target = (document.documentElement || document.body.parentNode || document.body) // cross browser support for document scrolling
-    var moving = false
-    var pos = target.scrollTop
+    let moving = false
+    let pos = target.scrollTop;
+    let bodyOffsetHack = 11;
     target.addEventListener('mousewheel', scrolled, false)
     target.addEventListener('DOMMouseScroll', scrolled, false)
 
     function scrolled(e) {
         e.preventDefault(); // disable default scrolling
-        var delta = normalizeWheelDelta(e)
+        let delta = normalizeWheelDelta(e)
 
         pos += -delta * speed
-        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight + 11)) // limit scrolling BTW THE +11px is a Hack bc that's how much of the page I cant scroll
+        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight + bodyOffsetHack)) // limit scrolling BTW THE +11px is a Hack bc that's how much of the page I cant scroll
 
         if (!moving) update()
     }
@@ -35,7 +36,7 @@ function SmoothScroll(target, speed, smooth) {
 
     function update() {
         moving = true
-        var delta = (pos - target.scrollTop) / smooth
+        let delta = (pos - target.scrollTop) / smooth
         target.scrollTop += delta
         if (Math.abs(delta) > 0.5)
             requestFrame(update)
@@ -43,7 +44,7 @@ function SmoothScroll(target, speed, smooth) {
             moving = false
     }
 
-    var requestFrame = function () { // requestAnimationFrame cross browser
+    let requestFrame = function () { // requestAnimationFrame cross browser
         return (
             window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
