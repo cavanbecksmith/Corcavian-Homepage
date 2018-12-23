@@ -7,7 +7,7 @@ import {FullScreenPanel} from './components/Helpers/FullscreenPanel.js';
 import $ from 'jquery';
 window.$ = $;
 import Style from './index.scss';
-// import "./css/fontawesome.css";
+import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 import { Parallax, $$, isInView, percentageScrolled, scrollDetails } from "./js/Helpers";
 
