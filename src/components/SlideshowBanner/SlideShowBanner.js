@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
-import "css/fontawesome.css";
+// import "css/fontawesome.css";
 
 export default class SlideShowBanner extends Component{
     
