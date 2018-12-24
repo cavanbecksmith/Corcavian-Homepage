@@ -11,6 +11,26 @@ import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 import { Parallax, $$, isInView, percentageScrolled, scrollDetails } from "./js/Helpers";
 
+const hideEl = (el) =>{
+  el = document.querySelector(el);
+  // if (el.classList.includes('show')){
+    el.classList.remove('show');
+    el.classList.add('hide');
+  // }
+};
+
+const showEl = (el) =>{
+  el = document.querySelector(el);
+  // if (el.classList.includes('hide')) {
+    el.classList.remove('hide');
+    el.classList.add('show');
+  // }
+};
+
+const showItem = (el) => {
+
+}
+
 class App extends Component {
 
   componentDidMount(){}
@@ -24,7 +44,7 @@ class App extends Component {
 
         <main style={{position: 'relative'}}>
           <div className="container">
-            <div className="container__cell left">
+            <div className="container__cell animateIn left">
               <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
             <div className="container__cell right">
@@ -56,13 +76,23 @@ $(window).on('load scroll', function(){
   var screenSize = window.screen.height;
   // console.log(screenSize);
   // console.log('Window Height:', windowH, 'Scroll Top:', scrollTop);
+
+  // console.log(isInView('.animateIn', scrollTop, -200));
   Parallax(scrollTop);
-  isInView('.strokeThrough', scrollTop);
+  isInView('.animateIn', scrollTop, 300);
+  if (isInView('.animateIn', scrollTop, 200)){
+    showEl('.animateIn');
+  }
+  else{
+    hideEl('.animateIn');
+  }
 });
 
-$(window).on('resize', function () {
+$(window).on('load resize', function () {
+  let scrollTop = window.pageYOffset;
   Parallax(scrollTop);
 });
+
 
 ReactDOM.render(
   <App />,

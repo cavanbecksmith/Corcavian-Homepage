@@ -82,3 +82,12 @@ main{
 
 }
 
+
+.hide{
+	transition: all 1.5s;
+	opacity: 0;
+}
+.show{
+	transition: all 1.5s;
+	opacity: 1;
+}
