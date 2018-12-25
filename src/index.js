@@ -9,27 +9,8 @@ window.$ = $;
 import Style from './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
-import { Parallax, $$, isInView, percentageScrolled, scrollDetails } from "./js/Helpers";
+import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showEl, hideEl } from "./js/Helpers";
 
-const hideEl = (el) =>{
-  el = document.querySelector(el);
-  // if (el.classList.includes('show')){
-    el.classList.remove('show');
-    el.classList.add('hide');
-  // }
-};
-
-const showEl = (el) =>{
-  el = document.querySelector(el);
-  // if (el.classList.includes('hide')) {
-    el.classList.remove('hide');
-    el.classList.add('show');
-  // }
-};
-
-const showItem = (el) => {
-
-}
 
 class App extends Component {
 
@@ -47,7 +28,7 @@ class App extends Component {
             <div className="container__cell animateIn left">
               <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
-            <div className="container__cell right">
+            <div className="container__cell right animateIn hide">
               <p>At Corcavian we are at the forefront of new technolgies and design techniques. We use a variety of new web technolgies such as React, SASS, CANVAS HTML5 and many frameworks such as Bootstrap and Wordpress.</p>
             </div>
             <div className="container__cell fullW">
@@ -74,18 +55,18 @@ $(window).on('load scroll', function(){
   let scrollPerc = percentageScrolled(scrollTop);
   let windowH = scrollDetails().pageHeight;
   var screenSize = window.screen.height;
-  // console.log(screenSize);
-  // console.log('Window Height:', windowH, 'Scroll Top:', scrollTop);
 
-  // console.log(isInView('.animateIn', scrollTop, -200));
   Parallax(scrollTop);
-  isInView('.animateIn', scrollTop, 300);
-  if (isInView('.animateIn', scrollTop, 200)){
-    showEl('.animateIn');
-  }
-  else{
-    hideEl('.animateIn');
-  }
+  
+  isInView('.animateIn', scrollTop, 300).forEach((data,index,array)=>{
+    // console.log(data.el, index, array);
+    if (data.isInView) {
+      showEl(data.el);
+    }
+    else {
+      hideEl(data.el);
+    }
+  });
 });
 
 $(window).on('load resize', function () {

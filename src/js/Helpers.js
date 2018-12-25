@@ -112,19 +112,29 @@ export function getRelativePosition(el){
 }
 
 
-export const isInView = (el, scrollTop, offset) => {
-    el = document.querySelector(el);
-    let elPos = getRelativePosition(el).y;
-    let elHeight = el.getBoundingClientRect().height;
-    let limit =  elPos + elHeight;
-    var screenSize = window.screen.height;
-    // console.log((elPos - screenSize + offset), (elPos - screenSize), 'ssdfsdf');
-    if (scrollTop > (elPos - screenSize + offset) && scrollTop <= limit) {// console.log('Element is in view');
-        return true;
-    }
-    else {
-        return false;
-    }
+export const isInView = (elems, scrollTop, offset, cb) => {
+
+    let viewArr = [];
+
+    $$(elems).forEach((el,index,array)=>{
+
+        let elPos = getRelativePosition(el).y;
+        let elHeight = el.getBoundingClientRect().height;
+        let limit = elPos + elHeight;
+        var screenSize = window.screen.height;
+
+        console.log(el);
+        
+        if (scrollTop > (elPos - screenSize + offset) && scrollTop <= limit) {
+            viewArr.push({ isInView: true, el: el, index: index, array: array });
+        }
+        else {
+            viewArr.push({ isInView: false, el: el, index: index, array: array });
+        }
+    });
+
+    return viewArr;
+
 }
 
 export const percentageScrolled =  (scrollTop) =>{
@@ -142,4 +152,24 @@ export const scrollDetails = () => {
         pageHeight: document.querySelector('html').offsetHeight - window.innerHeight,
         pageWidth: document.querySelector('html').offsetWidth - window.innerWidth
     }
+};
+
+
+
+export const showEl = (el) => {
+    console.log(typeof el);
+    if (typeof el !== 'object') {
+        el = document.querySelector(el);
+    }
+    el.classList.remove('hide');
+    el.classList.add('show');
+};
+
+export const hideEl = (el) => {
+
+    if (typeof el !== 'object') {
+        el = document.querySelector(el);
+    }
+    el.classList.remove('show');
+    el.classList.add('hide');
 };
