@@ -9,7 +9,7 @@ window.$ = $;
 import Style from './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
-import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showEl, hideEl } from "./js/Helpers";
+import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInView } from "./js/Helpers";
 
 
 class App extends Component {
@@ -57,16 +57,7 @@ $(window).on('load scroll', function(){
   var screenSize = window.screen.height;
 
   Parallax(scrollTop);
-  
-  isInView('.animateIn', scrollTop, 300).forEach((data,index,array)=>{
-    // console.log(data.el, index, array);
-    if (data.isInView) {
-      showEl(data.el);
-    }
-    else {
-      hideEl(data.el);
-    }
-  });
+  showHideInView('.animateIn', scrollTop);
 });
 
 $(window).on('load resize', function () {

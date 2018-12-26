@@ -1,5 +1,16 @@
+
+/**
+* Contains the initial positions for parallax for relative positions
+* @array initialPositions
+*/
 export let initialPositions = [];
 
+/**
+* Creates a Parallax background based on a few data attributes
+* If the position is relative use class "relative"
+* [data-background, data-depth, data-x, data-offsetY, data-pin]
+* @param {ScrollTop}
+*/
 export function Parallax(scrollTop) {
     $$(".parallax").forEach(function (el, index, array) {
         let depth = Number(el.getAttribute('data-depth')) || 0.25;
@@ -111,7 +122,10 @@ export function getRelativePosition(el){
 
 }
 
-
+/**
+* returns the el position relative to the top
+* @returns {Array} An array of objects containing {isInView, el, index, array}
+*/
 export const isInView = (elems, scrollTop, offset, cb) => {
 
     let viewArr = [];
@@ -123,7 +137,6 @@ export const isInView = (elems, scrollTop, offset, cb) => {
         let limit = elPos + elHeight;
         var screenSize = window.screen.height;
 
-        console.log(el);
         
         if (scrollTop > (elPos - screenSize + offset) && scrollTop <= limit) {
             viewArr.push({ isInView: true, el: el, index: index, array: array });
@@ -137,6 +150,11 @@ export const isInView = (elems, scrollTop, offset, cb) => {
 
 }
 
+/**
+* returns scroll percentage
+* @param {ScrollTop}
+* @returns {Number}
+*/
 export const percentageScrolled =  (scrollTop) =>{
 
     let pageHeight = scrollDetails().pageHeight ;
@@ -146,7 +164,11 @@ export const percentageScrolled =  (scrollTop) =>{
     // e.g 300 / 6000 = 0.05
 };
 
-
+/**
+* returns some page details integral for getting proper width and height of page
+* @returns {pageHeight} Total sum of the page height
+* @returns {pageWidth} Total sum of the page width
+*/
 export const scrollDetails = () => {
     return { // w/o taking the innerH off the percentage wouldn't be correct
         pageHeight: document.querySelector('html').offsetHeight - window.innerHeight,
@@ -155,9 +177,11 @@ export const scrollDetails = () => {
 };
 
 
-
+/**
+* returns the el position relative to the top
+* @param {String || HTMLElement} el - adds class of show
+*/
 export const showEl = (el) => {
-    console.log(typeof el);
     if (typeof el !== 'object') {
         el = document.querySelector(el);
     }
@@ -165,6 +189,10 @@ export const showEl = (el) => {
     el.classList.add('show');
 };
 
+/**
+* returns the el position relative to the top
+* @param {String || HTMLElement} el - adds class of hide
+*/
 export const hideEl = (el) => {
 
     if (typeof el !== 'object') {
@@ -172,4 +200,21 @@ export const hideEl = (el) => {
     }
     el.classList.remove('show');
     el.classList.add('hide');
+};
+
+
+/**
+* returns the el position relative to the top
+* @param {String} el - element to show or hide
+* @param {String} scrolltop - PageYOffset scroll top
+*/
+export const showHideInView = (el, scrollTop) => {
+    isInView(el, scrollTop, 300).forEach((data, index, array) => {
+        if (data.isInView) {
+            showEl(data.el);
+        }
+        else {
+            hideEl(data.el);
+        }
+    });
 };
