@@ -9,6 +9,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 });
 var Inliner = require('inliner');
 const fs = require('fs');
+const exec = require('child_process').exec;
 
 const copyWebpackPlugin = new CopyWebpackPlugin([
   {
@@ -21,12 +22,13 @@ const copyWebpackPlugin = new CopyWebpackPlugin([
   }
 ]);
 
+
 module.exports = env => {
 
-  let plugs = [htmlWebpackPlugin,copyWebpackPlugin];
+  let plugins = [htmlWebpackPlugin,copyWebpackPlugin];
 
   if(env.NODE_ENV === 'inline'){
-    plugs.push(new inlineContent());
+    plugins.push(new inlineContent());
   }
 
 
@@ -109,51 +111,15 @@ module.exports = env => {
         css: path.resolve(__dirname, 'src/css'),
       }
     },
-    // plugins: [htmlWebpackPlugin, copyWebpackPlugin]
-    plugins: plugs
+    plugins: plugins
   }
 };
-
-// --- A boilerplate for webpack plugin.
-// --- Prints a file list
-// --- plugins: [new FileListPlugin]
-class FileListPlugin {
-  apply(compiler) {
-    // emit is asynchronous hook, tapping into it using tapAsync, you can use tapPromise/tap(synchronous) as well
-    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
-      // Create a header string for the generated file:
-      var filelist = 'In this build:\n\n';
-
-      // Loop through all compiled assets,
-      // adding a new line item for each filename.
-      for (var filename in compilation.assets) {
-        filelist += '- ' + filename + '\n';
-      }
-
-      // Insert this list into the webpack build as a new file asset:
-      compilation.assets['filelist.md'] = {
-        source: function () {
-          return filelist;
-        },
-        size: function () {
-          return filelist.length;
-        }
-      };
-
-      callback();
-    });
-  }
-}
 
 class inlineContent {
 
   apply(compiler){
-    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
-      console.log('Inline contnet');
-      // console.log(env, ': IS IN PRODUCTIOn');
+    compiler.hooks.done.tap('InlineContentPlugin', params => {
       new Inliner('./dist/index.html', function (error, html) {
-        // compressed and inlined HTML page
-        // console.log(html);
         fs.writeFile("./dist/index.production.html", html, function (err) {
           if (err) {
             return console.log(err);
@@ -162,7 +128,6 @@ class inlineContent {
         });
 
       });
-      callback();
     });
   }
 
