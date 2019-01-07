@@ -178,7 +178,7 @@ export const scrollDetails = () => {
 
 
 /**
-* returns the el position relative to the top
+* Shows the element
 * @param {String || HTMLElement} el - adds class of show
 */
 export const showEl = (el) => {
@@ -190,7 +190,7 @@ export const showEl = (el) => {
 };
 
 /**
-* returns the el position relative to the top
+* Hides the element
 * @param {String || HTMLElement} el - adds class of hide
 */
 export const hideEl = (el) => {
@@ -204,17 +204,24 @@ export const hideEl = (el) => {
 
 
 /**
-* returns the el position relative to the top
+* Shows and hides the element in view
 * @param {String} el - element to show or hide
 * @param {String} scrolltop - PageYOffset scroll top
+* @param {Function} cb - Callback funciton on complete
 */
-export const showHideInView = (el, scrollTop) => {
+export const showHideInView = (el, scrollTop, cb) => {
     isInView(el, scrollTop, 300).forEach((data, index, array) => {
         if (data.isInView) {
             showEl(data.el);
+            if (typeof cb === 'function'){
+                cb(data);
+            }
         }
         else {
             hideEl(data.el);
+            if (typeof cb === 'function') {
+                cb(data);
+            }
         }
     });
 };

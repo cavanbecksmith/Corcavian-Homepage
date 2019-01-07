@@ -53,11 +53,13 @@ $(document).ready(()=>{
 $(window).on('load scroll', function(){
   let scrollTop = window.pageYOffset;
   let scrollPerc = percentageScrolled(scrollTop);
-  let windowH = scrollDetails().pageHeight;
-  var screenSize = window.screen.height;
+  // let windowH = scrollDetails().pageHeight;
+  // var screenSize = window.screen.height;
 
   Parallax(scrollTop);
-  showHideInView('.animateIn', scrollTop);
+  showHideInView('.animateIn', scrollTop, function(data){
+    console.log(data);
+  });
 });
 
 $(window).on('load resize', function () {
