@@ -135,16 +135,27 @@ export const isInView = (elems, scrollTop, offset, cb) => {
         let elPos = getRelativePosition(el).y;
         let elHeight = el.getBoundingClientRect().height;
         let limit = elPos + elHeight;
-        var screenSize = window.screen.height;
+        var screenSize = window.innerHeight;
+    
 
-        
-        if (scrollTop > (elPos - screenSize + offset) && scrollTop <= limit) {
+        // If -> scrollTop > (elementPosition 
+        // - windowHeight (Element position in accordance to Window Height)
+        // + elementHeight (SO IT'S IN VIEW AFTER ENTIRE ELEMENT HAS ENTERED)  
+        // + offSet (Dependant on when the user wants the elem to be in view))
+        if (scrollTop > (elPos - screenSize + elHeight + offset) && scrollTop <= limit) {
+            if(cb){
+                cb({ isInView: true, el: el, index: index, array: array });
+            }
             viewArr.push({ isInView: true, el: el, index: index, array: array });
         }
         else {
+            if(cb){
+                cb({ isInView: false, el: el, index: index, array: array });
+            }
             viewArr.push({ isInView: false, el: el, index: index, array: array });
         }
     });
+
 
     return viewArr;
 
@@ -210,7 +221,7 @@ export const hideEl = (el) => {
 * @param {Function} cb - Callback funciton on complete
 */
 export const showHideInView = (el, scrollTop, cb) => {
-    isInView(el, scrollTop, 300).forEach((data, index, array) => {
+    isInView(el, scrollTop, 0).forEach((data, index, array) => {
         if (data.isInView) {
             showEl(data.el);
             if (typeof cb === 'function'){

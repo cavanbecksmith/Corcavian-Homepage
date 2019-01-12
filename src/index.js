@@ -25,10 +25,10 @@ class App extends Component {
 
         <main style={{position: 'relative'}}>
           <div className="container">
-            <div className="container__cell animateIn left">
+            <div className="container__cell animateIn test left">
               <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
-            <div className="container__cell right animateIn hide">
+            <div className="container__cell animateIn right hide">
               <p>At Corcavian we are at the forefront of new technolgies and design techniques. We use a variety of new web technolgies such as React, SASS, CANVAS HTML5 and many frameworks such as Bootstrap and Wordpress.</p>
             </div>
             <div className="container__cell fullW">
@@ -57,9 +57,8 @@ $(window).on('load scroll', function(){
   // var screenSize = window.screen.height;
 
   Parallax(scrollTop);
-  showHideInView('.animateIn', scrollTop, function(data){
-    console.log(data);
-  });
+  showHideInView('.animateIn', scrollTop, function(data){});
+  // isInView('.test', scrollTop, 0, (data) => {});
 });
 
 $(window).on('load resize', function () {
