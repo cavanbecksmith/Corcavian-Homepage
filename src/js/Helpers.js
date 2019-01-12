@@ -221,7 +221,7 @@ export const hideEl = (el) => {
 * @param {Function} cb - Callback funciton on complete
 */
 export const showHideInView = (el, scrollTop, cb) => {
-    isInView(el, scrollTop, 0).forEach((data, index, array) => {
+    isInView(el, scrollTop, 200).forEach((data, index, array) => {
         if (data.isInView) {
             showEl(data.el);
             if (typeof cb === 'function'){
