@@ -30,6 +30,7 @@
             // background: blue;
         }
         &__arrow{
+            cursor: pointer;
             position: absolute;
             top: calc(50% + (#{$sideMargin} / 2) );
             transform: translate3d(0, -50%, 0);
@@ -85,6 +86,7 @@
             &__Arrow{
                 $p: 70px;
                 position: absolute;
+                cursor: pointer;
                 width: 50%;
                 height: 20px;
                 // background: white;

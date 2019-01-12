@@ -1,15 +1,14 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./SlideShowBanner.scss";
-// import "css/fontawesome.css";
 
 export default class SlideShowBanner extends Component{
     
     constructor(props){
         super(props);
         this.loaded = false;
+        this.timerID = null;
         this.state = {
-            // offsetY: null,
             slideIndex: 0,
             images: [
                 require('assets/slideshow/img_01.jpg'),
@@ -33,6 +32,7 @@ export default class SlideShowBanner extends Component{
         };
         this.innerIMG = React.createRef();
         this.nextSlide = this.nextSlide.bind(this);
+        this.previousSlide = this.previousSlide.bind(this);
     }
 
     componentDidMount() {
@@ -41,14 +41,13 @@ export default class SlideShowBanner extends Component{
     }
 
     timeOut(){
-        setTimeout(() => {
+        this.timerID = setTimeout(() => {
             this.nextSlide();
-            this.timeOut();
         }, 5000);
     }
 
     nextSlide(){
-
+        clearTimeout(this.timerID);
         if(this.state.slideIndex === this.state.images.length - 1){
             this.setState({
                 slideIndex: 0
@@ -59,12 +58,12 @@ export default class SlideShowBanner extends Component{
                 slideIndex: this.state.slideIndex + 1
             });
         }
-
+        this.timeOut();
     }
 
     previousSlide() {
-
-        if (this.state.slideIndex === -1) {
+        clearTimeout(this.timerID);
+        if (this.state.slideIndex === 0) {
             this.setState({
                 slideIndex: this.state.images.length - 1
             });
@@ -74,6 +73,7 @@ export default class SlideShowBanner extends Component{
                 slideIndex: this.state.slideIndex - 1
             });
         }
+        this.timeOut();
     }
 
     render(){
@@ -82,10 +82,10 @@ export default class SlideShowBanner extends Component{
 
                 <div className="mobileControls">
                     <div className="mobileControls__arrow Previous">
-                        <span className="fa fa-long-arrow-left"></span>
+                        <span className="fa fa-long-arrow-left" onClick={this.previousSlide}></span>
                     </div>
                     <div className="mobileControls__arrow Next">
-                        <span className="fa fa-long-arrow-right"></span>
+                        <span className="fa fa-long-arrow-right" onClick={this.nextSlide}></span>
                     </div>
                 </div>
 
@@ -94,26 +94,21 @@ export default class SlideShowBanner extends Component{
                         <div className="SlideShowBanner__CircleContainer__Circle">
                         
                             <div className="SlideShowBanner__CircleContainer__Circle__Arrow Previous">
-                                <span className="fa fa-long-arrow-left"></span>
+                                <span className="fa fa-long-arrow-left" onClick={this.previousSlide}></span>
                             </div>
 
                             <div className="SlideShowBanner__CircleContainer__Circle__Arrow Next">
-                                <span className="fa fa-long-arrow-right"></span>
+                                <span className="fa fa-long-arrow-right" onClick={this.nextSlide}></span>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
                 {this.props.children}
-
-                <button style={{zIndex: 1000, position: "absolute"}} onClick={this.nextSlide}>sdfsdf</button>
-
                 {this.state.images.map((v,i)=>{
 
                     let opacity = 0;
                     let wrapperClass = "SlideShowBanner parallax";
-                    let containerClasses = "";
                     let backgroundClasses = "SlideShowBanner__backgroundIMG";
                     let innerIMGClass = "SlideShowBanner__container__innerIMG";
                     let textWrapper = "SlideShowBanner__container__content__text";
@@ -163,8 +158,6 @@ export default class SlideShowBanner extends Component{
                                 }}
                             ></div>
 
-                            {/* <div className="SlideShowBanner__overlay"></div> */}
-
                             {/* Circle component */}
 
                             <div className="SlideShowBanner__container">
@@ -173,7 +166,8 @@ export default class SlideShowBanner extends Component{
                                 <div
                                     className={innerIMGClass}
                                     style={{backgroundImage: `url(${this.state.images[i]})`,}}
-                                    ref={this.innerIMG}></div>
+                                    // ref={this.innerIMG}
+                                ></div>
                                 
                                 {/* RHS Content */}
                                 <div className="SlideShowBanner__container__content">
@@ -182,7 +176,6 @@ export default class SlideShowBanner extends Component{
                                         <div className="footnote">{`${this.state.text[i].para}`}</div>
                                     </div>
                                 </div>
-                                {/*  */}
 
                             </div>
                         </div>
