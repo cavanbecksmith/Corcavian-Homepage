@@ -1,6 +1,11 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./SlideShowBanner.scss";
+
+console.log(ReactCSSTransitionGroup);
+
+
 
 export default class SlideShowBanner extends Component{
     
@@ -8,37 +13,43 @@ export default class SlideShowBanner extends Component{
         super(props);
         this.loaded = false;
         this.timerID = null;
+        // this.carouselDirection = null;
+        this.previousIndex = null;
         this.state = {
             slideIndex: 0,
-            images: [
-                require('assets/slideshow/img_01.jpg'),
-                require('assets/slideshow/img_02.jpg'),
-                require('assets/slideshow/img_03.jpg')
-            ],
-            text: [
+            // images: [],
+            content: [
                 {
+                    img: require('assets/slideshow/img_01.jpg'),
                     header: `Welcome to Corcavian!`, 
                     para: '- We are designers, developers, new guys on the block and enthusiasts but most of all we make things happen.'
                 },
                 {
+                    img: require('assets/slideshow/img_02.jpg'),
                     header: `We strive for a better tommorow.`,
                     para: `- We make sure that we put 100% passion into our work to make sure you'll leave with a smile on your face.`
                 },
                 {
+                    img: require('assets/slideshow/img_03.jpg'),
                     header: `The Devil's in the details.`, 
                     para: '- In our work we will take the time to focus on even the smallest and most intricate details to ensure that your product is nothing but pristine perfect.'
                 }
-            ]
+            ],
+            displayContent: []
         };
+
         this.innerIMG = React.createRef();
         this.nextSlide = this.nextSlide.bind(this);
         this.previousSlide = this.previousSlide.bind(this);
     }
 
     componentDidMount() {
-        this.loaded = true;
+        if(!this.loaded){
+            this.loaded = true;
+        }
         this.timeOut();
     }
+
 
     timeOut(){
         this.timerID = setTimeout(() => {
@@ -48,7 +59,9 @@ export default class SlideShowBanner extends Component{
 
     nextSlide(){
         clearTimeout(this.timerID);
-        if(this.state.slideIndex === this.state.images.length - 1){
+        // this.carouselDirection = 'nxt';
+        this.previousIndex = this.state.slideIndex;
+        if(this.state.slideIndex === this.state.content.length - 1){
             this.setState({
                 slideIndex: 0
             });
@@ -63,9 +76,10 @@ export default class SlideShowBanner extends Component{
 
     previousSlide() {
         clearTimeout(this.timerID);
+        this.previousIndex = this.state.slideIndex;
         if (this.state.slideIndex === 0) {
             this.setState({
-                slideIndex: this.state.images.length - 1
+                slideIndex: this.state.content.length - 1
             });
         }
         else {
@@ -73,10 +87,35 @@ export default class SlideShowBanner extends Component{
                 slideIndex: this.state.slideIndex - 1
             });
         }
+        this.removeItem();
+        this.addItem(this.state.content[this.state.slideIndex]);
         this.timeOut();
     }
 
     render(){
+
+        const SlideShowSlide = ({ header, para, active, image, zIndex, i, previousIndex }) => {
+
+            return (
+                <div
+                    className={`SlideShowBanner parallax ${active ? '' : (previousIndex ? '' : 'hidden')}`} style={{ zIndex: zIndex }} key={i}>
+                    <div className={`SlideShowBanner__backgroundIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${previousIndex ? '' : image})`, backgroundSize: 'cover' }}></div>
+                    <div className="SlideShowBanner__container">
+
+
+                        <div className={`SlideShowBanner__container__innerIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${image})` }}></div>
+                        <div className="SlideShowBanner__container__content">
+                            <div className={`SlideShowBanner__container__content__text ${active ? 'inAnim' : 'outAnim'}`}>
+                                <div className="header">{`${header}`}</div>
+                                <div className="footnote">{`${para}`}</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            )
+        };
+        
         return(
             <div className="SlideShowWrapper">
 
@@ -105,80 +144,15 @@ export default class SlideShowBanner extends Component{
                     </div>
                 </div>
                 {this.props.children}
-                {this.state.images.map((v,i)=>{
+                {this.state.content.map((v,i)=>{
 
-                    let opacity = 0;
-                    let wrapperClass = "SlideShowBanner parallax";
-                    let backgroundClasses = "SlideShowBanner__backgroundIMG";
-                    let innerIMGClass = "SlideShowBanner__container__innerIMG";
-                    let textWrapper = "SlideShowBanner__container__content__text";
-                    let zIndex;
-
-                    if(this.loaded){
-                        if (i !== this.state.slideIndex) {
-                            zIndex = 1;
-                            innerIMGClass += " outAnim";
-                            backgroundClasses += " outAnim"
-                            wrapperClass += " hide";
-                            textWrapper += " outAnim";
-                        }
-                        else {
-                            zIndex = 0;
-                            innerIMGClass += " inAnim";
-                            backgroundClasses += " inAnim";
-                            textWrapper += " inAnim";
-                        }
-                    }
-                    else{
-                        if (i !== this.state.slideIndex){
-                            // Prevent the animation from being seen 
-                            // but still present to hide slides
-                            zIndex = -1;
-                            innerIMGClass += " outAnim";
-                            backgroundClasses += " outAnim"
-                            wrapperClass += " hide";
-                            textWrapper += " outAnim";
-                        }
-                    }
+                    let active = i === this.state.slideIndex ? true : false;
+                    let zi = `${!this.loaded ? (i !== this.state.slideIndex ? -1 : 1) : (i !== this.state.slideIndex ? 1 : 0)}`;
+                    let activeHidden = null;
+                    let previousIndex = this.previousIndex === i ? true : false;
 
                     return(
-                        <div
-                            className={wrapperClass}
-                            style={{
-                                zIndex
-                            }}
-                            key={i}
-                        >
-
-                            <div 
-                                className={backgroundClasses}
-                                style={{
-                                    backgroundImage: `url(${this.state.images[i]})`,
-                                    backgroundSize: 'cover'
-                                }}
-                            ></div>
-
-                            {/* Circle component */}
-
-                            <div className="SlideShowBanner__container">
-
-                                {/* Inner Background IMG */}
-                                <div
-                                    className={innerIMGClass}
-                                    style={{backgroundImage: `url(${this.state.images[i]})`,}}
-                                    // ref={this.innerIMG}
-                                ></div>
-                                
-                                {/* RHS Content */}
-                                <div className="SlideShowBanner__container__content">
-                                    <div className={textWrapper}>
-                                        <div className="header">{`${this.state.text[i].header}`}</div>
-                                        <div className="footnote">{`${this.state.text[i].para}`}</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <SlideShowSlide active={active} previousIndex={previousIndex} header={v['header']} para={v['para']} image={v['img']} zIndex={zi} i={i}/>
                     );
                 })}
             </div>
@@ -186,3 +160,5 @@ export default class SlideShowBanner extends Component{
     }
 
 }
+
+
