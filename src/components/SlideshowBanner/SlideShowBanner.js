@@ -13,11 +13,9 @@ export default class SlideShowBanner extends Component{
         super(props);
         this.loaded = false;
         this.timerID = null;
-        // this.carouselDirection = null;
         this.previousIndex = null;
         this.state = {
             slideIndex: 0,
-            // images: [],
             content: [
                 {
                     img: require('assets/slideshow/img_01.jpg'),
@@ -37,8 +35,6 @@ export default class SlideShowBanner extends Component{
             ],
             displayContent: []
         };
-
-        this.innerIMG = React.createRef();
         this.nextSlide = this.nextSlide.bind(this);
         this.previousSlide = this.previousSlide.bind(this);
     }
@@ -59,7 +55,6 @@ export default class SlideShowBanner extends Component{
 
     nextSlide(){
         clearTimeout(this.timerID);
-        // this.carouselDirection = 'nxt';
         this.previousIndex = this.state.slideIndex;
         if(this.state.slideIndex === this.state.content.length - 1){
             this.setState({
@@ -87,19 +82,17 @@ export default class SlideShowBanner extends Component{
                 slideIndex: this.state.slideIndex - 1
             });
         }
-        this.removeItem();
-        this.addItem(this.state.content[this.state.slideIndex]);
         this.timeOut();
     }
 
     render(){
 
-        const SlideShowSlide = ({ header, para, active, image, zIndex, i, previousIndex }) => {
+        const SlideShowSlide = ({ header, para, active, image, zIndex, previous }) => {
 
             return (
                 <div
-                    className={`SlideShowBanner parallax ${active ? '' : (previousIndex ? '' : 'hidden')}`} style={{ zIndex: zIndex }} key={i}>
-                    <div className={`SlideShowBanner__backgroundIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${previousIndex ? '' : image})`, backgroundSize: 'cover' }}></div>
+                    className={`SlideShowBanner parallax ${active ? '' : (previous ? '' : 'hidden')}`} style={{ zIndex: zIndex }}>
+                    <div className={`SlideShowBanner__backgroundIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${previous ? '' : image})`, backgroundSize: 'cover' }}></div>
                     <div className="SlideShowBanner__container">
 
 
@@ -147,12 +140,12 @@ export default class SlideShowBanner extends Component{
                 {this.state.content.map((v,i)=>{
 
                     let active = i === this.state.slideIndex ? true : false;
-                    let zi = `${!this.loaded ? (i !== this.state.slideIndex ? -1 : 1) : (i !== this.state.slideIndex ? 1 : 0)}`;
+                    // let zi = `${!this.loaded ? (i !== this.state.slideIndex ? -1 : 1) : (i !== this.state.slideIndex ? 1 : 0)}`;
                     let activeHidden = null;
                     let previousIndex = this.previousIndex === i ? true : false;
 
                     return(
-                        <SlideShowSlide active={active} previousIndex={previousIndex} header={v['header']} para={v['para']} image={v['img']} zIndex={zi} i={i}/>
+                        <SlideShowSlide active={active} previous={previousIndex} header={v['header']} para={v['para']} image={v['img']} zIndex={1} key={i}/>
                     );
                 })}
             </div>

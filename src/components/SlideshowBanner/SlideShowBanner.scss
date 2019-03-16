@@ -16,7 +16,7 @@
         @include Fullsize;
     }
 
-
+ 
     .mobileControls{
         width: 100%;
         height: 100%;
@@ -27,7 +27,6 @@
         font-size: 50px;
         @media (max-width: $xl-width) { /*1100px*/
             display: block;
-            // background: blue;
         }
         &__arrow{
             cursor: pointer;
@@ -57,15 +56,10 @@
     &.hide{
         opacity: 0;
         z-index: 1;
-        // animation:frame_hide 1s 1;
-        // -moz-animation:frame_hide 1s 1;
-        // -webkit-animation:frame_hide 1s 1;
-        // -o-animation:frame_hide 1s 1;
     }
 
     &.hidden{
         opacity: 0;
-        // transition: all 1s;
         display: none;
     }
     
@@ -95,7 +89,6 @@
                 cursor: pointer;
                 width: 50%;
                 height: 20px;
-                // background: white;
                 top: 50%;
                 color: white;
                 font-size: 50px;
@@ -126,7 +119,6 @@
             -moz-animation:background_anim_in 1s 1;
             -webkit-animation:background_anim_in 1s 1;
             -o-animation:background_anim_in 1s 1;
-            // animation-delay: 1s;
         }
         &.outAnim{
             opacity: 0;
@@ -138,8 +130,6 @@
     }
     &__container{
         margin: 0 $sideMargin;
-        // margin-top: $sideMargin;
-        // height: calc(100% - (#{$sideMargin} ));
         height: 100%;
         position: relative;
         overflow: hidden;
@@ -158,20 +148,15 @@
             top: 0;
             left: -#{$sideMargin};
             width: calc(100% + (#{$sideMargin} * 2));
-            // height: calc(100% + #{$sideMargin} + (#{$sideMargin} / 2));
             height: 100%;
             @media (max-width: $xl-width){
                 background-size: cover;
                 position: absolute;
                 left: 0;
-                /* top: -9rem; */
                 left: -9rem;
                 width: calc(100% + (9rem * 2));
                 height: 100%;
             }
-            // @media (max-width: $md-width) { /* 700px */
-            //     height: calc(100% + #{$sideMargin});
-            // }
             @media (max-width: $sm-width) { /* 500px */
                 display: none !important;
             }
@@ -214,6 +199,7 @@
             }
             &__text{
                 $y: -50%;
+                will-change: transform;
                 height: auto;
                 display: inline-block;
                 position: absolute;
@@ -265,7 +251,7 @@
                 }
                 &.outAnim{
                     $x: -100%;
-                    transition: all 1s;
+                    transition: translate 1s;
                     transform: translate3d($x, $y, 0);
                     animation:outAnim 1s 1;
                     -moz-animation:outAnim 1s 1;
