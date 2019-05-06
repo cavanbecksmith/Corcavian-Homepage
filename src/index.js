@@ -11,20 +11,31 @@ import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInView } from "./js/Helpers";
 
-
+let logoColor = 'white';
+let lastTop = 0;
 class App extends Component {
 
-  componentDidMount(){}
+  constructor(props){
+    super(props);
+    this.currentBGColor = 'white';
+    console.log(this);
+  }
+
+  componentDidMount(){
+    // this.checkSlideColor();
+  }
+
+
 
   render() {
     return (
       <div className="wrapper">
         <GuideLines></GuideLines>
-        <Navigation></Navigation>
+        <Navigation bgColor={logoColor}></Navigation>
         <SlideShowBanner></SlideShowBanner>
 
         <main style={{position: 'relative'}}>
-          <div className="container">
+          <div className="container __slide" data-slide="black">
             <div className="container__cell animateIn test left">
               <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
@@ -37,8 +48,25 @@ class App extends Component {
           </div>
 
 
-          <div style={{height: '5000px', background: 'black'}}></div>
-
+          <div style={{
+            minHeight: '800px',
+            background: '#5c5cd6',
+            padding: '30px'
+          }} className="__slide" data-slide="white">
+            <div className="container" style={{height: '500px'}}>
+              <div className="container__cell animateIn left hide">
+                <h1 style={{color: 'white'}}>
+                  Some of our services
+                </h1>
+                <p style={{color: 'white'}}>
+                  We offer a range of services with the upmost support to keep you updated with the latest trends and teqniques in development
+                </p>
+              </div>
+              <div className="container__cell animateIn right hide">
+                
+              </div>
+            </div>
+          </div>
         </main>
 
       </div>
@@ -46,8 +74,43 @@ class App extends Component {
   }
 }
 
+function checkSlideColor() {
+
+  // console.log('gshdfkjgdsfds', percentageScrolled(window.pageYOffset));
+  let top = percentageScrolled(window.pageYOffset);
+  let slideMax = 0;
+  let slideColor = '';
+  let currentSlideTop;
+  let slideArr = [];
+  let hasRun = false;
+  $('.__slide').each(function (i) {
+
+    let slideOffset = percentageScrolled($(this).offset().top);
+
+    if(slideOffset > slideMax && hasRun === false){
+      hasRun = true;
+      slideOffset = slideMax;
+    }
+
+    if (top > slideOffset) {
+      // slideMax = slideOffset;
+      currentSlideTop = slideOffset;
+      slideColor = $(this).attr('data-slide');
+    }
+    slideArr.push(percentageScrolled($(this).offset().top));
+  });
+  // console.log(slideArr);
+  slideArr = [];
+  lastTop = 
+  logoColor = slideColor;
+  console.log('current color should be ', slideColor, top, slideMax);
+}
+
+
+
+
 $(document).ready(()=>{
-  SmoothScrolling(60, 12);
+  // SmoothScrolling(60, 12);
 });
 
 $(window).on('load scroll', function(){
@@ -55,6 +118,8 @@ $(window).on('load scroll', function(){
   let scrollPerc = percentageScrolled(scrollTop);
   // let windowH = scrollDetails().pageHeight;
   // var screenSize = window.screen.height;
+
+  checkSlideColor();
 
   Parallax(scrollTop);
   showHideInView('.animateIn', scrollTop, function(data){});

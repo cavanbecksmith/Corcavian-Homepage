@@ -13,6 +13,7 @@ export default class Navigation extends Component {
             burgerMenu: 'closed'
         };
         this.openBurger = this.openBurger.bind(this);
+        console.log('PARENT');
     }
 
     openBurger(){
@@ -25,12 +26,23 @@ export default class Navigation extends Component {
         }
     }
 
+    logoSelect(){
+        console.log('Logo select');
+        if(this.props.bgColor === 'black'){
+            return (<img src={LogoWhite} />);
+        }else if(this.props.bgColor === 'white'){
+           return (<img src={LogoBlack} />); 
+        }else{
+            return;
+        }
+    }
+
     render(){
         return (
             <div className="Nav">
 
                 <div className="Nav__logo">
-                    <img src={LogoWhite} />
+                    {this.logoSelect()}
                 </div>
                 <div className="Nav__links">
                     <ul>
