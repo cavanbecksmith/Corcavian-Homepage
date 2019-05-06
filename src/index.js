@@ -11,8 +11,9 @@ import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
 import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInView } from "./js/Helpers";
 
-let logoColor = 'white';
-let lastTop = 0;
+
+let logoColorSlidesArr = [];
+
 class App extends Component {
 
   constructor(props){
@@ -31,7 +32,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <GuideLines></GuideLines>
-        <Navigation bgColor={logoColor}></Navigation>
+        <Navigation></Navigation>
         <SlideShowBanner></SlideShowBanner>
 
         <main style={{position: 'relative'}}>
@@ -63,7 +64,7 @@ class App extends Component {
                 </p>
               </div>
               <div className="container__cell animateIn right hide">
-                
+
               </div>
             </div>
           </div>
@@ -74,43 +75,16 @@ class App extends Component {
   }
 }
 
-function checkSlideColor() {
-
-  // console.log('gshdfkjgdsfds', percentageScrolled(window.pageYOffset));
-  let top = percentageScrolled(window.pageYOffset);
-  let slideMax = 0;
-  let slideColor = '';
-  let currentSlideTop;
-  let slideArr = [];
-  let hasRun = false;
+function checkSlideColorInit(){
   $('.__slide').each(function (i) {
-
-    let slideOffset = percentageScrolled($(this).offset().top);
-
-    if(slideOffset > slideMax && hasRun === false){
-      hasRun = true;
-      slideOffset = slideMax;
-    }
-
-    if (top > slideOffset) {
-      // slideMax = slideOffset;
-      currentSlideTop = slideOffset;
-      slideColor = $(this).attr('data-slide');
-    }
-    slideArr.push(percentageScrolled($(this).offset().top));
+    logoColorSlidesArr.push(percentageScrolled($(this).offset().top));
   });
-  // console.log(slideArr);
-  slideArr = [];
-  lastTop = 
-  logoColor = slideColor;
-  console.log('current color should be ', slideColor, top, slideMax);
+  console.log(logoColorSlidesArr);
 }
-
-
-
 
 $(document).ready(()=>{
   // SmoothScrolling(60, 12);
+  checkSlideColorInit();
 });
 
 $(window).on('load scroll', function(){
@@ -119,7 +93,7 @@ $(window).on('load scroll', function(){
   // let windowH = scrollDetails().pageHeight;
   // var screenSize = window.screen.height;
 
-  checkSlideColor();
+  // checkSlideColor();
 
   Parallax(scrollTop);
   showHideInView('.animateIn', scrollTop, function(data){});
@@ -134,5 +108,5 @@ $(window).on('load resize', function () {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')        
+  document.getElementById('root')
 );
