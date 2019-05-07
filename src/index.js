@@ -13,6 +13,7 @@ import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInVi
 
 
 let logoColorSlidesArr = [];
+let currentLogo = null;
 
 class App extends Component {
 
@@ -32,7 +33,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <GuideLines></GuideLines>
-        <Navigation></Navigation>
+        <Navigation bgColor="white"></Navigation>
         <SlideShowBanner></SlideShowBanner>
 
         <main style={{position: 'relative'}}>
@@ -77,23 +78,82 @@ class App extends Component {
 
 function checkSlideColorInit(){
   $('.__slide').each(function (i) {
-    logoColorSlidesArr.push(percentageScrolled($(this).offset().top));
+
+    // console.log($(this));
+
+    let active = false;
+    if(i === 0){
+      active = true;
+    }
+
+    var obj = {
+      id: i,
+      yPos: percentageScrolled($(this).offset().top),
+      color: $(this).attr('data-slide'),
+      active: active
+    };
+
+    if(i === 0){
+      currentLogo = obj;
+    }
+
+    logoColorSlidesArr.push(obj);
   });
-  console.log(logoColorSlidesArr);
+  // console.log(logoColorSlidesArr);
+}
+
+
+function updateLogoColor(){
+  let currentColor = null;
+  let scrollPerc = percentageScrolled(window.pageYOffset);
+  let counter = 0;
+  // console.log(scrollPerc);
+  getNextLogoColor(scrollPerc, counter, null);
+  // logoColor = currentColor.color;
+}
+
+
+function getNextLogoColor(scrollPos, counter, previous){
+
+  // Gets current and next in the array
+  let current = logoColorSlidesArr[counter];
+  let next = logoColorSlidesArr[counter+1];
+
+  // https://www.youtube.com/// Get the active object
+  if(current.active === true){
+    if(next && previous){
+      if(current.yPos < next.yPos){
+        return current;
+      } else if (current.yPos ) else {
+        return getNextLogoColor(scrollPos, counter++, current);
+      }
+    } else if (previous && !next) {
+      console.log('LAST OF THE ARRAY')
+      if(current.yPos > previous.yPos){
+        return current;
+      } else {
+        return previous
+      }
+    } else if (next && !previous) {
+      console.log('Next exists and no previous', scrollPos, counter, previous);
+    }
+  }
+
 }
 
 $(document).ready(()=>{
   // SmoothScrolling(60, 12);
-  checkSlideColorInit();
+  setTimeout(function(){
+    checkSlideColorInit();
+  }, 0)
 });
 
 $(window).on('load scroll', function(){
   let scrollTop = window.pageYOffset;
   let scrollPerc = percentageScrolled(scrollTop);
-  // let windowH = scrollDetails().pageHeight;
-  // var screenSize = window.screen.height;
 
-  // checkSlideColor();
+  // Updates logo color when scroll position changed
+  updateLogoColor();
 
   Parallax(scrollTop);
   showHideInView('.animateIn', scrollTop, function(data){});

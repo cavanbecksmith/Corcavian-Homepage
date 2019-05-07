@@ -8,7 +8,7 @@ console.log(ReactCSSTransitionGroup);
 
 
 export default class SlideShowBanner extends Component{
-    
+
     constructor(props){
         super(props);
         this.loaded = false;
@@ -19,7 +19,7 @@ export default class SlideShowBanner extends Component{
             content: [
                 {
                     img: require('assets/slideshow/img_01.jpg'),
-                    header: `Welcome to Corcavian!`, 
+                    header: `Welcome to Corcavian!`,
                     para: '- We are designers, developers, new guys on the block and enthusiasts but most of all we make things happen.'
                 },
                 {
@@ -29,7 +29,7 @@ export default class SlideShowBanner extends Component{
                 },
                 {
                     img: require('assets/slideshow/img_03.jpg'),
-                    header: `The Devil's in the details.`, 
+                    header: `The Devil's in the details.`,
                     para: '- In our work we will take the time to focus on even the smallest and most intricate details to ensure that your product is nothing but pristine perfect.'
                 }
             ],
@@ -91,7 +91,7 @@ export default class SlideShowBanner extends Component{
 
             return (
                 <div
-                    className={`SlideShowBanner parallax ${active ? '' : (previous ? '' : 'hidden')} __slide`} style={{ zIndex: zIndex }} data-slide="white">
+                    className={`SlideShowBanner parallax ${active ? '' : (previous ? '' : 'hidden')}`} style={{ zIndex: zIndex }} data-slide="white">
                     <div className={`SlideShowBanner__backgroundIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${previous ? '' : image})`, backgroundSize: 'cover' }}></div>
                     <div className="SlideShowBanner__container">
 
@@ -108,9 +108,9 @@ export default class SlideShowBanner extends Component{
                 </div>
             )
         };
-        
+
         return(
-            <div className="SlideShowWrapper">
+            <div className="SlideShowWrapper __slide">
 
                 <div className="mobileControls">
                     <div className="mobileControls__arrow Previous">
@@ -124,7 +124,7 @@ export default class SlideShowBanner extends Component{
                 <div className="absolute">
                     <div className="SlideShowBanner__CircleContainer">
                         <div className="SlideShowBanner__CircleContainer__Circle">
-                        
+
                             <div className="SlideShowBanner__CircleContainer__Circle__Arrow Previous">
                                 <span className="fa fa-long-arrow-left" onClick={this.previousSlide}></span>
                             </div>
@@ -153,5 +153,3 @@ export default class SlideShowBanner extends Component{
     }
 
 }
-
-
