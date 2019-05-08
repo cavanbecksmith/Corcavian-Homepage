@@ -106,38 +106,41 @@ function checkSlideColorInit(){
 function updateLogoColor(){
   let currentColor = null;
   let scrollPerc = percentageScrolled(window.pageYOffset);
-  let counter = 0;
-  // console.log(scrollPerc);
-  getNextLogoColor(scrollPerc, counter, null);
-  // logoColor = currentColor.color;
+  getNextLogoColor(scrollPerc);
 }
 
 
-function getNextLogoColor(scrollPos, counter, previous){
+function getNextLogoColor(scrollPos){
 
-  // Gets current and next in the array
-  let current = logoColorSlidesArr[counter];
-  let next = logoColorSlidesArr[counter+1];
 
-  // https://www.youtube.com/// Get the active object
-  if(current.active === true){
-    if(next && previous){
-      if(current.yPos < next.yPos){
-        return current;
-      } else if (current.yPos ) else {
-        return getNextLogoColor(scrollPos, counter++, current);
-      }
-    } else if (previous && !next) {
-      console.log('LAST OF THE ARRAY')
-      if(current.yPos > previous.yPos){
-        return current;
-      } else {
-        return previous
-      }
-    } else if (next && !previous) {
-      console.log('Next exists and no previous', scrollPos, counter, previous);
-    }
-  }
+  let currentColor = 'white';
+
+	for (var i = 0; i < logoColorSlidesArr.length; i++) {
+
+		let next = logoColorSlidesArr[i+1] || logoColorSlidesArr.length;
+		let prev = logoColorSlidesArr[i-1] || 0;
+		let current = logoColorSlidesArr[i];
+
+		if(logoColorSlidesArr[i].active === true){
+
+			console.log('Hey there', current);
+
+			if(scrollPos >= (next.yPos - 30)){
+				current.active = false;
+				next.active = true;
+				getNextLogoColor(scrollPos);
+				break;
+			} else if (scrollPos <= (prev.yPos + 30)) {
+				current.active = false;
+				prev.active = true;
+				getNextLogoColor(scrollPos);
+				break;
+			} else if (scrollPos <= next.yPos && scrollPos >= prev.yPos) {
+				console.log('Broken the loop');
+				break;
+			}
+		}
+	}
 
 }
 
