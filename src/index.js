@@ -86,7 +86,7 @@ function checkSlideColorInit(){
       active = true;
     }
 
-    var obj = {
+    let obj = {
       id: i,
       yPos: percentageScrolled($(this).offset().top),
       color: $(this).attr('data-slide'),
@@ -99,7 +99,6 @@ function checkSlideColorInit(){
 
     logoColorSlidesArr.push(obj);
   });
-  // console.log(logoColorSlidesArr);
 }
 
 
@@ -113,36 +112,55 @@ function updateLogoColor(){
 function getNextLogoColor(scrollPos){
 
 
-  let currentColor = 'white';
+  	let currentColor = 'white';
 
-	for (var i = 0; i < logoColorSlidesArr.length; i++) {
 
-		let next = logoColorSlidesArr[i+1] || logoColorSlidesArr.length;
-		let prev = logoColorSlidesArr[i-1] || 0;
-		let current = logoColorSlidesArr[i];
-
-		if(logoColorSlidesArr[i].active === true){
-
-			console.log('Hey there', current);
-
-			if(scrollPos >= (next.yPos - 30)){
-				current.active = false;
-				next.active = true;
-				getNextLogoColor(scrollPos);
-				break;
-			} else if (scrollPos <= (prev.yPos + 30)) {
-				current.active = false;
-				prev.active = true;
-				getNextLogoColor(scrollPos);
-				break;
-			} else if (scrollPos <= next.yPos && scrollPos >= prev.yPos) {
-				console.log('Broken the loop');
-				break;
-			}
-		}
-	}
-
+    let current = currentLogo;
+		let next = logoColorSlidesArr[current.id+1] || logoColorSlidesArr.length;
+		let prev = logoColorSlidesArr[current.id-1] || 0;
+    
+    if(scrollPos >= next.yPos){
+      current.active = false;
+      next.active = true;
+      currentLogo = next;
+    } else if (scrollPos <= current.yPos) {
+      current.active = false;
+      prev.active = true;
+      currentLogo = prev;
+    }
 }
+
+// function recursivePositionCheck (scrollPos, i) {
+// 	let next = logoColorSlidesArr[i+1] || logoColorSlidesArr.length;
+// 	let prev = logoColorSlidesArr[i-1] || 0;
+// 	let current = logoColorSlidesArr[i];
+//
+// 	console.log(i);
+//
+// 	if(logoColorSlidesArr[i].active === true){
+//
+// 		console.log('Hey there', current.id);
+//
+// 		if(scrollPos >= (next.yPos - 30)){
+// 			current.active = false;
+// 			next.active = true;
+// 			return next;
+// 			// break;
+// 		} else if (scrollPos <= (prev.yPos + 30)) {
+// 			current.active = false;
+// 			prev.active = true;
+// 			return prev;
+// 			// break;
+// 		} else if (scrollPos <= next.yPos && scrollPos >= prev.yPos) {
+// 			// console.log('Broken the loop');
+// 			// break;
+// 			return current;
+// 		}
+// 	} else {
+// 		return recursivePositionCheck(scrollPos, i++);
+// 	}
+//
+// }
 
 $(document).ready(()=>{
   // SmoothScrolling(60, 12);
@@ -156,7 +174,12 @@ $(window).on('load scroll', function(){
   let scrollPerc = percentageScrolled(scrollTop);
 
   // Updates logo color when scroll position changed
-  updateLogoColor();
+  let running = false;
+  // setTimeout(function(){
+	  // if(running = false
+		  updateLogoColor();
+	  // }
+  // }, 500);
 
   Parallax(scrollTop);
   showHideInView('.animateIn', scrollTop, function(data){});
