@@ -176,6 +176,16 @@ export const percentageScrolled =  (scrollTop) =>{
 };
 
 /**
+* Returns a percentange of size relative to windows height
+* @param {jQuery|Element}
+* @returns {Number}
+*/
+export const getHSizeAsPercentage = (element) => {
+    return parseFloat(element.height() / $(window).height() * 100).toFixed(2);
+};
+
+
+/**
 * returns some page details integral for getting proper width and height of page
 * @returns {pageHeight} Total sum of the page height
 * @returns {pageWidth} Total sum of the page width

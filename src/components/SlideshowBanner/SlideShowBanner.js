@@ -91,7 +91,7 @@ export default class SlideShowBanner extends Component{
 
             return (
                 <div
-                    className={`SlideShowBanner parallax ${active ? '' : (previous ? '' : 'hidden')}`} style={{ zIndex: zIndex }} data-slide="white">
+                    className={`SlideShowBanner parallax ${active ? '' : (previous ? '' : 'hidden')}`} style={{ zIndex: zIndex }}>
                     <div className={`SlideShowBanner__backgroundIMG ${active ? 'inAnim' : 'outAnim'}`} style={{ backgroundImage: `url(${previous ? '' : image})`, backgroundSize: 'cover' }}></div>
                     <div className="SlideShowBanner__container">
 
@@ -110,7 +110,7 @@ export default class SlideShowBanner extends Component{
         };
 
         return(
-            <div className="SlideShowWrapper __slide">
+            <div className="SlideShowWrapper __slide" data-slide="white">
 
                 <div className="mobileControls">
                     <div className="mobileControls__arrow Previous">

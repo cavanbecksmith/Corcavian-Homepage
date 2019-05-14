@@ -9,11 +9,12 @@ window.$ = $;
 import Style from './index.scss';
 import "./css/fontawesome.css";
 import SmoothScrolling from './js/SmoothScroll';
-import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInView } from "./js/Helpers";
+import { Parallax, $$, isInView, percentageScrolled, scrollDetails, showHideInView, getHSizeAsPercentage } from "./js/Helpers";
 
 
 let logoColorSlidesArr = [];
 let currentLogo = null;
+let color = 'white';
 
 class App extends Component {
 
@@ -33,16 +34,19 @@ class App extends Component {
     return (
       <div className="wrapper">
         <GuideLines></GuideLines>
-        <Navigation bgColor="white"></Navigation>
+        <Navigation bgColor={color}></Navigation>
         <SlideShowBanner></SlideShowBanner>
 
-        <main style={{position: 'relative'}}>
-          <div className="container __slide" data-slide="black">
+        <main style={{position: 'relative', padding: '0px'}}>
+          <div className="container padding__large __slide" data-slide="black">
             <div className="container__cell animateIn test left">
-              <h1>A little Bit About Us at <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
+              <h1>A little Bit about <span data-depth="1.25" className="strokeThrough" style={{ position: 'relative' }}>Corcavian</span></h1>
             </div>
             <div className="container__cell animateIn right hide">
-              <p>At Corcavian we are at the forefront of new technolgies and design techniques. We use a variety of new web technolgies such as React, SASS, CANVAS HTML5 and many frameworks such as Bootstrap and Wordpress.</p>
+
+              <div className=""></div>
+
+              <p>Corcavian is a Web Design and Development company with precision in mind and apply's only the best in design practices in each project ensuring your product is fit for purpose.</p>
             </div>
             <div className="container__cell fullW">
               {/* <h1>Something Goes Here</h1> */}
@@ -55,12 +59,52 @@ class App extends Component {
             background: '#5c5cd6',
             padding: '30px'
           }} className="__slide" data-slide="white">
-            <div className="container" style={{height: '500px'}}>
+            <div className="container padding__large" style={{height: '500px'}}>
               <div className="container__cell animateIn left hide">
                 <h1 style={{color: 'white'}}>
                   Some of our services
                 </h1>
                 <p style={{color: 'white'}}>
+                  We offer a range of services with the upmost support to keep you updated with the latest trends and teqniques in development
+                </p>
+              </div>
+              <div className="container__cell animateIn right hide">
+
+              </div>
+            </div>
+          </div>
+
+          <div style={{
+            minHeight: '800px',
+            background: '#FFF',
+            padding: '30px'
+          }} className="__slide" data-slide="black">
+            <div className="container" style={{ height: '500px' }}>
+              <div className="container__cell animateIn left hide">
+                <h1 style={{ color: 'black' }}>
+                  Some of our services
+                </h1>
+                <p style={{ color: 'black' }}>
+                  We offer a range of services with the upmost support to keep you updated with the latest trends and teqniques in development
+                </p>
+              </div>
+              <div className="container__cell animateIn right hide">
+
+              </div>
+            </div>
+          </div>
+
+          <div style={{
+            minHeight: '800px',
+            background: '#000',
+            padding: '30px'
+          }} className="__slide" data-slide="white">
+            <div className="container" style={{ height: '500px' }}>
+              <div className="container__cell animateIn left hide">
+                <h1 style={{ color: 'white' }}>
+                  Some of our services
+                </h1>
+                <p style={{ color: 'white' }}>
                   We offer a range of services with the upmost support to keep you updated with the latest trends and teqniques in development
                 </p>
               </div>
@@ -78,8 +122,6 @@ class App extends Component {
 
 function checkSlideColorInit(){
   $('.__slide').each(function (i) {
-
-    // console.log($(this));
 
     let active = false;
     if(i === 0){
@@ -111,59 +153,38 @@ function updateLogoColor(){
 
 function getNextLogoColor(scrollPos){
 
-
   	let currentColor = 'white';
-
-
     let current = currentLogo;
 		let next = logoColorSlidesArr[current.id+1] || logoColorSlidesArr.length;
-		let prev = logoColorSlidesArr[current.id-1] || 0;
-    
-    if(scrollPos >= next.yPos){
+    let prev = logoColorSlidesArr[current.id-1] || 0;
+    // Padding = 2%
+    let padding = 2;
+
+    if(scrollPos >= (next.yPos - padding)){
       current.active = false;
       next.active = true;
       currentLogo = next;
-    } else if (scrollPos <= current.yPos) {
+      color = next.color;
+    } else if (scrollPos <= (current.yPos - padding)) {
       current.active = false;
       prev.active = true;
       currentLogo = prev;
+      color = prev.color;
     }
+
+    let src;
+
+    if(current.color === 'black'){
+      src = require('assets/LogoBlack.png')
+    } else {
+      src = require('assets/LogoWhite.png')
+    }
+
+    $('.Nav__logo img').attr('src', src);
 }
 
-// function recursivePositionCheck (scrollPos, i) {
-// 	let next = logoColorSlidesArr[i+1] || logoColorSlidesArr.length;
-// 	let prev = logoColorSlidesArr[i-1] || 0;
-// 	let current = logoColorSlidesArr[i];
-//
-// 	console.log(i);
-//
-// 	if(logoColorSlidesArr[i].active === true){
-//
-// 		console.log('Hey there', current.id);
-//
-// 		if(scrollPos >= (next.yPos - 30)){
-// 			current.active = false;
-// 			next.active = true;
-// 			return next;
-// 			// break;
-// 		} else if (scrollPos <= (prev.yPos + 30)) {
-// 			current.active = false;
-// 			prev.active = true;
-// 			return prev;
-// 			// break;
-// 		} else if (scrollPos <= next.yPos && scrollPos >= prev.yPos) {
-// 			// console.log('Broken the loop');
-// 			// break;
-// 			return current;
-// 		}
-// 	} else {
-// 		return recursivePositionCheck(scrollPos, i++);
-// 	}
-//
-// }
 
 $(document).ready(()=>{
-  // SmoothScrolling(60, 12);
   setTimeout(function(){
     checkSlideColorInit();
   }, 0)
@@ -175,15 +196,10 @@ $(window).on('load scroll', function(){
 
   // Updates logo color when scroll position changed
   let running = false;
-  // setTimeout(function(){
-	  // if(running = false
-		  updateLogoColor();
-	  // }
-  // }, 500);
+  updateLogoColor();
 
   Parallax(scrollTop);
   showHideInView('.animateIn', scrollTop, function(data){});
-  // isInView('.test', scrollTop, 0, (data) => {});
 });
 
 $(window).on('load resize', function () {
